@@ -5,9 +5,10 @@ This will be a "points" tracker for the active DSP brothers — Alpha Chi chapte
     - add events
     - check points
     - check trialStatus (True or False)
-    - display all events
+    - display all events attended
     - remove brothers
     - check rank
+    - add points for everyone
     
     
 TODO:    
