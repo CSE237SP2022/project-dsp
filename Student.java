@@ -1,4 +1,3 @@
-package dsp2;
 
 public class Student {
 	String firstName;
