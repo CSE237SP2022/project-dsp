@@ -28,7 +28,9 @@ public class Student {
 		this.minor1 = minor1;
 		this.minor2 = minor2;
 	}
-	
+	public String getName() {
+		return this.name;
+	}
 	public int getGradYear() {
 		return this.gradYear;
 	}
@@ -67,4 +69,5 @@ public class Student {
 		String[] majorsMinors= {this.major1, this.major2, this.minor1, this.minor2};
 		return majorsMinors;
 	}
+	
 }
