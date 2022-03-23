@@ -5,12 +5,54 @@ public class Company {
 	private String description;
 	private int numStudents;
 	
-	public Company(String setName, String setIndustry, String setDescription) {
+	public Company(String setName, String setIndustry, String setDescription, int setNumStudents) {
+		if (setName == null)
+            throw new IllegalArgumentException("Company title can't be null");
+		
 		this.name = setName;
 		this.industry = setIndustry;
 		this.description = setDescription;
-		this.numStudents = 0;
+		this.numStudents = setNumStudents;	
+	}
+	
+	public Company(String setName, String setIndustry, int setNumStudents) {
+		if (setName == null)
+            throw new IllegalArgumentException("Company title can't be null");
 		
+		this.name = setName;
+		this.industry = setIndustry;
+		this.description = "This is a very impressive company!";
+		this.numStudents = setNumStudents;	
+	}
+	
+	public Company(String setName, String setIndustry, String setDescription) {
+		if (setName == null)
+            throw new IllegalArgumentException("Company title can't be null");
+		
+		this.name = setName;
+		this.industry = setIndustry;
+		this.description = setDescription;
+		this.numStudents = 0;	
+	}
+	
+	public Company(String setName, String setIndustry) {
+		if (setName == null)
+            throw new IllegalArgumentException("Company title can't be null");
+		
+		this.name = setName;
+		this.industry = setIndustry;
+		this.description = "This is a very impressive company!";
+		this.numStudents = 0;	
+	}
+	
+	public Company(String setName) {
+		if (setName == null)
+            throw new IllegalArgumentException("Company title can't be null");
+		
+		this.name = setName;
+		this.industry = "N/A";
+		this.description = "This is a very impressive company!";
+		this.numStudents = 0;	
 	}
 	
 //	Get Name
