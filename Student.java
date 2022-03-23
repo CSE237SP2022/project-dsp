@@ -15,7 +15,7 @@ public class Student {
 	private String minor2;
 	
 	
-	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteElgible, String school, String major1, String major2, String minor1, String minor2) {
+	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteElgible,String school, String major1, String major2, String minor1, String minor2) {
 		this.name = name;
 		this.gradYear = gradYear;
 		this.initYear = initYear;
