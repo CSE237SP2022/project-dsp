@@ -15,13 +15,13 @@ public class Student {
 	private String minor2;
 	
 	
-	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteElgible,String school, String major1, String major2, String minor1, String minor2) {
+	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteEligible, String school, String major1, String major2, String minor1, String minor2) {
 		this.name = name;
 		this.gradYear = gradYear;
 		this.initYear = initYear;
 		this.isActive = isActive;
 		this.isFall = isFall;
-		this.voteElgible = voteElgible;
+		this.voteElgible = voteEligible;
 		this.school = school;
 		this.major1 = major1;
 		this.major2 = major2;
@@ -50,7 +50,7 @@ public class Student {
 		return this.isFall;
 	}
 	
-	public boolean getIsElgible() {
+	public boolean getIsEligible() {
 		return this.voteElgible;
 	}
 	
