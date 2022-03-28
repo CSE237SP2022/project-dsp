@@ -52,7 +52,7 @@ public class Student {
 		return this.isFall;
 	}
 	
-	public boolean getIsElgible() {
+	public boolean getIsEligible() {
 		return this.voteElgible;
 	}
 	
@@ -68,6 +68,17 @@ public class Student {
 	public String[] getMajorsMinors() {
 		String[] majorsMinors= {this.major1, this.major2, this.minor1, this.minor2};
 		return majorsMinors;
+	}
+	
+	public void displayAllInfo() {
+		System.out.println("Name: " + this.getName());
+		System.out.println("School: " + this.getSchool());
+		System.out.println("Majors/Minors: " + this.getMajorsMinors());
+		System.out.println("Graduation Year: " + this.getGradYear());
+		System.out.println("Initiation Year: " + this.getInitYear());
+		System.out.println("Brother is active: " + this.getIsActive());
+		System.out.println("Brother joined in the fall: " + this.getIsFall());
+		System.out.println("Brother is eligible for bid vote: " + this.getIsEligible());
 	}
 	
 }
