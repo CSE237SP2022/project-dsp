@@ -49,6 +49,21 @@ public class Student {
 		this.school = school;
 	}
 	
+	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteElgible, String school) {
+		resume = new ArrayList<Role>();
+		
+		this.majors = new ArrayList<String>();
+		this.minors = new ArrayList<String>();
+		
+		this.name = name;
+		this.gradYear = gradYear;
+		this.initYear = initYear;
+		this.isActive = isActive;
+		this.isFall = isFall;
+		this.voteElgible = voteElgible;
+		this.school = school;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
