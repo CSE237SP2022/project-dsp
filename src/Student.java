@@ -1,13 +1,13 @@
-package src;
+	package src;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
-	
 	private String name;
 	private int gradYear;
 	private int initYear;
+	private int points;
 	
 	private boolean isActive;
 	private boolean isFall;
@@ -30,6 +30,7 @@ public class Student {
 		this.isFall = isFall;
 		this.voteElgible = voteElgible;
 		this.school = school;
+		this.points = 0;
 		this.majors.add(major1);
 		this.majors.add(major2);
 		this.minors.add(minor1);
@@ -39,8 +40,6 @@ public class Student {
 	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteElgible, String school, List<String> majors, List<String> minors) {
 		resume = new ArrayList<Role>();
 		
-		this.majors = majors;
-		this.minors = minors;
 		this.name = name;
 		this.gradYear = gradYear;
 		this.initYear = initYear;
@@ -48,11 +47,13 @@ public class Student {
 		this.isFall = isFall;
 		this.voteElgible = voteElgible;
 		this.school = school;
+		this.points = 0;
+		this.majors = majors;
+		this.minors = minors;
 	}
 	
 	public Student(String name, int gradYear, int initYear, boolean isActive, boolean isFall, boolean voteElgible, String school) {
 		resume = new ArrayList<Role>();
-		
 		this.majors = new ArrayList<String>();
 		this.minors = new ArrayList<String>();
 		
@@ -63,6 +64,11 @@ public class Student {
 		this.isFall = isFall;
 		this.voteElgible = voteElgible;
 		this.school = school;
+		this.points = 0;
+	}
+	
+	public int getPoints() {
+		return this.points;
 	}
 	
 	public String getName() {
@@ -98,6 +104,11 @@ public class Student {
 	
 	public List<String> getMinors(){
 		return this.minors;
+	}
+	
+	public int addPoints(int newPoints) {
+		this.points += newPoints;
+		return this.points;
 	}
 	
 	public int changeGradYear(int newGradYear) {
