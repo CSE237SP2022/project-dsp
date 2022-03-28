@@ -1,8 +1,8 @@
-// code adapted from https://stackoverflow.com/questions/50185655/login-on-java-based-from-txt-file
+// some of this code adapted from https://stackoverflow.com/questions/50185655/login-on-java-based-from-txt-file
 
+// especially the pieces with referencing external text files and throwing errors
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 public class Login {
 	
