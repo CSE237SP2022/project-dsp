@@ -3,6 +3,7 @@ public class Student {
 	private String name;
 	private int gradYear;
 	private int initYear;
+	private int points;
 	
 	private boolean isActive;
 	private boolean isFall;
@@ -19,6 +20,7 @@ public class Student {
 		this.name = name;
 		this.gradYear = gradYear;
 		this.initYear = initYear;
+		this.points = 0;
 		this.isActive = isActive;
 		this.isFall = isFall;
 		this.voteElgible = voteEligible;

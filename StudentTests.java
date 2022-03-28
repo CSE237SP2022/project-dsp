@@ -3,20 +3,16 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
-@RunWith(Suite.class)
-@SuiteClasses({})
+
 public class StudentTests {
 	
-	//private Student s;
+	private Student s;
 	
-	//@Before
-	//public void setup() {
-	//		s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
-	//	}
+	@Before
+	public void setup() {
+			s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
+		}
 
 	//@Test
 	//void testName() {
@@ -25,14 +21,14 @@ public class StudentTests {
 	//}
 	
 	@Test
-	 void testGradYear() {
+	 public void testGradYear() {
 		Student s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
 		int gradYear = s.getGradYear();
 		assertEquals(2024, gradYear);
 	}
 	
 	@Test
-	void testChangeGradYear() {
+	public void testChangeGradYear() {
 		int gradYear = s.getGradYear();
 		assertEquals(2024, gradYear);
 		gradYear = s.changeGradYear(2025);
@@ -40,47 +36,49 @@ public class StudentTests {
 	}
 	
 	@Test
-	void testinitYear() {
+	public void testinitYear() {
 		int initYear = s.getInitYear();
 		assertEquals(10, initYear);
 	}
 
 	@Test
-	void testIsActive() {
+	public void testIsActive() {
 		boolean isActive = s.getIsActive();
 		assertEquals(true, isActive);
 	}
 	
 	//checks to see whether the member joined in the Fall
 	@Test
-	void testisFall() {
+	public void testisFall() {
 		boolean isFall = s.getIsFall();
-		assertEquals(true, isFall);
+		assertEquals(false, isFall);
 	}
 	
 	@Test
-	void testVoteEligible() {
+	public void testVoteEligible() {
 		boolean voteEligible = s.getIsEligible();
-		assertEquals(true, voteEligible);
+		assertEquals(false, voteEligible);
 	}
 	
 	@Test
-	void testSchoolName() {
+	public void testSchoolName() {
 		String school = s.getSchool();
 		assertEquals("Olin", school);
 	}
 	
 	@Test
-	void testChangeSchool() {
+	public void testChangeSchool() {
 		String school = s.getSchool();
 		assertEquals("Olin", school);
 		school = s.changeSchool("Artsci");
 		assertEquals("Artsci", school);
 	}
 	
-	//@Test void testMajorsAndMinors() {
-	//	String[] fieldOfStudy = s.getMajorsMinors();
-	//	assertArrayEquals({"Business", "CS", "Psychology", "N"}, fieldOfStudy);
-	//}
+	@Test 
+	public void testMajorsAndMinors() {
+		String[] fieldOfStudy = s.getMajorsMinors();
+		String[] output = {"Business", "CS", "Psych", "NA"};
+		assertArrayEquals(output, fieldOfStudy);
+	}
 
 }
