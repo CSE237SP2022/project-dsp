@@ -154,8 +154,8 @@ public class Student {
 	public void displayAllInfo() {
 		System.out.println("Name: " + this.getName());
 		System.out.println("School: " + this.getSchool());
-		System.out.println("Majors: " + this.getMajors());
-		System.out.println("Minors: " + this.getMinors());
+		System.out.println("Majors: " + this.majors.toString());
+		System.out.println("Minors: " + this.minors.toString());
 		System.out.println("Graduation Year: " + this.getGradYear());
 		System.out.println("Initiation Year: " + this.getInitYear());
 		System.out.println("Brother is active: " + this.getIsActive());
