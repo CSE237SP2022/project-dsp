@@ -1,8 +1,13 @@
+package src.Tests;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import src.Student;
 
 
 public class StudentTests {
@@ -75,10 +80,29 @@ public class StudentTests {
 	}
 	
 	@Test 
-	public void testMajorsAndMinors() {
-		String[] fieldOfStudy = s.getMajorsMinors();
-		String[] output = {"Business", "CS", "Psych", "NA"};
-		assertArrayEquals(output, fieldOfStudy);
+	public void testMajors() {
+		List<String> fieldOfStudy = s.getMajors();
+		String[] output = {"Business", "CS"};
+		assertArrayEquals(output, fieldOfStudy.toArray());
+	}
+	
+	@Test 
+	public void testMinors() {
+		List<String> fieldOfStudy = s.getMinors();
+		String[] output = { "Psych", "NA"};
+		assertArrayEquals(output, fieldOfStudy.toArray());
+	}
+	
+	@Test
+	 public void testAddPoints() {
+		s.addPoints(2);
+		assertEquals(12, s.getPoints());
+	}
+	
+	@Test
+	 public void testSubtractPoints() {
+		s.subtractPoints(2);
+		assertEquals(8, s.getPoints());
 	}
 
 }
