@@ -1,4 +1,4 @@
-package src;
+package src.Tests;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import src.Student;
 
 
 public class StudentTests {
