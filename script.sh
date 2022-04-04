@@ -1,2 +1,2 @@
 javac -d bin src/*.java
-java -cp bin Run
+java -cp bin src.Run
