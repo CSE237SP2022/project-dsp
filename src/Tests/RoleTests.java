@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import src.Company;
 import src.Role;
-import src.Student;
 
 public class RoleTests {
 	
