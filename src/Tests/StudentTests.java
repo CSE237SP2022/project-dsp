@@ -19,11 +19,11 @@ public class StudentTests {
 			s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
 		}
 
-	//@Test
-	//void testName() {
-	//	String name = s.getName();
-	//	assertEquals("Gavin Frank", name);
-	//}
+	@Test
+	public void testName() {
+		String name = s.getName();
+		assertEquals("Gavin Frank", name);
+	}
 	
 	@Test
 	 public void testGradYear() {
@@ -96,13 +96,19 @@ public class StudentTests {
 	@Test
 	 public void testAddPoints() {
 		s.addPoints(2);
-		assertEquals(12, s.getPoints());
+		assertEquals(2, s.getPoints());
+		s.addPoints(8);
+		assertEquals(10, s.getPoints());
 	}
 	
 	@Test
 	 public void testSubtractPoints() {
-		s.subtractPoints(2);
+		s.addPoints(8);
 		assertEquals(8, s.getPoints());
+		s.subtractPoints(2);
+		assertEquals(6, s.getPoints());
+		s.subtractPoints(1);
+		assertEquals(5, s.getPoints());
 	}
 
 }

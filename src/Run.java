@@ -1,7 +1,7 @@
+package src;
 import java.util.ArrayList;
 import java.util.List;
 
-package src;
 import argsProcessor.ArgsProcessor;
 
 public class Run {
@@ -48,10 +48,17 @@ public class Run {
 	private static void displayInfoCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("DisplayInfo")) {
 			String nameSearch = ap.nextString("What is the name of the member you want to display information for?");
+			boolean showPoints = ap.nextBoolean("Do you only want to see your points? true/false");
 			int len=allStudents.size();
 			for(int i=0; i<len; i++) {
 				if (allStudents.get(i).getName().equals(nameSearch)) {
-					allStudents.get(i).displayAllInfo();
+					if (!showPoints) {
+						allStudents.get(i).displayAllInfo();
+					}
+					else {
+						int numPoints = allStudents.get(i).getPoints();
+						System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
+					}
 				}
 			}
 
