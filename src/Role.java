@@ -1,3 +1,4 @@
+package src;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -9,20 +10,6 @@ public class Role {
 	private LocalDate dateStarted;
 	private LocalDate dateEnded;
 	
-	public Role(Company setCompany, String setTitle, boolean setActiveRole, LocalDate setDateStarted, LocalDate setDateEnded) {
-		if(setCompany == null)
-			throw new IllegalArgumentException("Company can't be null");
-		if(setTitle == null)
-			throw new IllegalArgumentException("Title can't be null");
-		if(setDateStarted == null)
-			throw new IllegalArgumentException("Date started can't be null");
-		
-		this.company = setCompany;
-		this.title = setTitle;
-		this.activeRole = setActiveRole;
-		this.dateStarted = setDateStarted;
-		this.dateEnded = setDateEnded;
-	}
 	
 	public Role(Company setCompany, String setTitle, LocalDate setDateStarted, LocalDate setDateEnded) {
 		if(setCompany == null)

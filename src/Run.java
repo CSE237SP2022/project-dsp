@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+package src;
 import argsProcessor.ArgsProcessor;
 
 public class Run {
