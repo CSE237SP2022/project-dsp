@@ -90,5 +90,17 @@ public class StudentTests {
 		String[] output = { "Psych", "NA"};
 		assertArrayEquals(output, fieldOfStudy.toArray());
 	}
+	
+	@Test
+	 public void testAddPoints() {
+		s.addPoints(2);
+		assertEquals(12, s.getPoints());
+	}
+	
+	@Test
+	 public void testSubtractPoints() {
+		s.subtractPoints(2);
+		assertEquals(8, s.getPoints());
+	}
 
 }
