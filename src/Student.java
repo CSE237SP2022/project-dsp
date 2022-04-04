@@ -116,11 +116,6 @@ public class Student {
 		return this.points;
 	}
 	
-	public int subtractPoints(int newPoints) {
-		this.points -= newPoints;
-		return this.points;
-	}
-	
 	public int changeGradYear(int newGradYear) {
 		this.gradYear = newGradYear;
 		return this.gradYear;
