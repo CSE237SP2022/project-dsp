@@ -2,21 +2,31 @@ package src.Tests;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import src.Company;
+import src.Role;
 import src.Student;
 
 
 public class StudentTests {
 	
 	private Student s;
+	private Company company;
+	private Role currentRole;
+	private Role previousRole;
 	
 	@Before
 	public void setup() {
 			s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
+			company = new Company("Apple", "Tech", "Makes iPhones");
+			currentRole = new Role(company, "CEO", LocalDate.of(2020, 1, 8));
+			previousRole = new Role(company, "CEO", LocalDate.of(2020, 1, 8), LocalDate.of(2021, 2, 10));
 		}
 
 	@Test
@@ -114,5 +124,39 @@ public class StudentTests {
 		boolean sTrialStatus = s.willBeTrialed();
 		assertEquals(true, sTrialStatus);
 	}
+	
+	@Test
+	public void testGetResumeNoEntries() {
+		List<Role> r = s.getResume();
+		List<Role> testResume = new ArrayList<Role>();
+		assertEquals(r, testResume);
+	}
+	
+	@Test
+	public void testResumePrint() {
+		s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
+		s.addResumeItem(company, "test2", LocalDate.of(2020, 1, 8));
+		
+		String resume = s.printResume().replace("\n", "");
+		String output = "Company: Apple"
+				+ "Title: CEO"
+				+ "Started: 2020-01-08"
+				+ "Company: Apple"
+				+ "Title: test2"
+				+ "Started: 2020-01-08";
+		assertEquals(resume, output);
+	}
+//	@Test
+//	public void testAddResumeItem() {
+//		List<Role> test = s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
+//		System.out.println(test.toArray());
+////		System.out.println(test.get(0).toString());
+//		List<Role> r = s.getResume();
+//		List<Role> testResume = new ArrayList<Role>();
+//		testResume.add(currentRole);
+//		System.out.println(r.toArray());
+////		System.out.println(testResume.toArray());
+//		assertArrayEquals(r.toArray(), testResume.toArray());
+//	}
 
 }
