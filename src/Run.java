@@ -5,6 +5,9 @@ import java.util.List;
 import argsProcessor.ArgsProcessor;
 
 public class Run {
+	
+	//TODO: can all the iterating be done in an individual method and then do .command on that method?
+	//TODO: stay in "exec" mode until quit
 
 	public static List<Student> allStudents = new ArrayList<Student>();
 	public static String studentName;
@@ -17,6 +20,7 @@ public class Run {
 			createStudentCommand(ap, userInput);
 			displayInfoCommand(ap, userInput);
 			quitCommand(userInput);
+			execCommands(ap, userInput);
 
 		}
 
@@ -39,12 +43,50 @@ public class Run {
 
 	}
 
+	private static void execCommands(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("rose")) {
+			String execCommand = ap.nextString("Welcome exec member. Press A to add events, R to remove brothers, \n C to change someone's points, or Q to quit");
+			execRemoveBrother(ap, execCommand);
+			execChangeBrotherPoints(ap, execCommand);
+			quitCommand(execCommand);
+			//TODO: add events command
+		}
+	}
+
+	private static void execChangeBrotherPoints(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("C")) {
+			String brotherName = ap.nextString("What is the name of the brother to change points");
+			int pointsChange = ap.nextInt("How many points would you like to add (include minus sign if you want to lower points)");
+			int len=allStudents.size();
+			for(int i=0; i<len; i++) {
+				if (allStudents.get(i).getName().equals(brotherName)) {
+					allStudents.get(i).addPoints(pointsChange);
+					System.out.println(pointsChange + " have been added to " + brotherName + ". Current points: " + allStudents.get(i).getPoints());
+					//TODO: probably can delete subtract points if we can just add a negative
+				}
+			}
+		}
+	}
+
+	private static void execRemoveBrother(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("R")) {
+			String brotherName = ap.nextString("What is the name of the brother to be removed?");
+			int len=allStudents.size();
+			for(int i=0; i<len; i++) {
+				if (allStudents.get(i).getName().equals(brotherName)) {
+					allStudents.remove(i);
+					System.out.println(brotherName + " has been removed. \n");
+				}
+			}
+		}
+	}
+
 	private static void quitCommand(String userInput) {
 		if (userInput.equals("Q")) {
 			return;
 		}
 	}
-
+	
 	private static void displayInfoCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("DisplayInfo")) {
 			String nameSearch = ap.nextString("What is the name of the member you want to display information for?");
@@ -60,10 +102,14 @@ public class Run {
 						System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
 					}
 				}
+				else {
+					System.out.println("Brother not found. \n");
+				}
 			}
 
 		}
 	}
+
 
 	private static void createStudentCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("S")) {
@@ -98,6 +144,7 @@ public class Run {
 		System.out.println("C: create a company");
 		System.out.println("E: create an event");
 		System.out.println("Q: to quit");
+		System.out.println("If you're on exec, you can also type your secret key");
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
 	}
