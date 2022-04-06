@@ -102,13 +102,17 @@ public class StudentTests {
 	}
 	
 	@Test
-	 public void testSubtractPoints() {
-		s.addPoints(8);
-		assertEquals(8, s.getPoints());
-		s.subtractPoints(2);
-		assertEquals(6, s.getPoints());
-		s.subtractPoints(1);
-		assertEquals(5, s.getPoints());
+	public void testWillNotBeTrialed() {
+		s.addPoints(65);
+		boolean sTrialStatus = s.willBeTrialed();
+		assertEquals(false, sTrialStatus);
+	}	
+	
+	@Test
+	public void testWillBeTrialed() {
+		s.addPoints(45);
+		boolean sTrialStatus = s.willBeTrialed();
+		assertEquals(true, sTrialStatus);
 	}
 
 }
