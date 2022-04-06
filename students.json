@@ -1,0 +1,21 @@
+[
+  {
+    "name": "gla",
+    "gradYear": 230,
+    "initYear": 2313,
+    "points": 0,
+    "isActive": false,
+    "isFall": false,
+    "voteElgible": true,
+    "school": "asd",
+    "majors": [
+      "asd",
+      "asd"
+    ],
+    "minors": [
+      "asd",
+      "asd"
+    ],
+    "resume": []
+  }
+]
