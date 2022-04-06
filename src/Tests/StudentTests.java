@@ -126,6 +126,22 @@ public class StudentTests {
 	}
 	
 	@Test
+	public void testToString() {
+		String studentInfo = s.toString().replace("\n", "");
+		String finalString = "Name: Gavin Frank"
+		+ "School: Olin"
+		+ "Majors: [Business, CS]"
+		+ "Minors: [Psych, NA]"
+		+ "Graduation Year: 2024"
+		+ "Initiation Year: 10"
+		+ "Brother is active: true"
+		+ "Brother joined in the fall: false"
+		+ "Brother is eligible for bid vote: false";
+		assertEquals(studentInfo, finalString);
+		
+	}
+	
+	@Test
 	public void testGetResumeNoEntries() {
 		List<Role> r = s.getResume();
 		List<Role> testResume = new ArrayList<Role>();
@@ -146,17 +162,17 @@ public class StudentTests {
 				+ "Started: 2020-01-08";
 		assertEquals(resume, output);
 	}
-//	@Test
-//	public void testAddResumeItem() {
-//		List<Role> test = s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
-//		System.out.println(test.toArray());
-////		System.out.println(test.get(0).toString());
-//		List<Role> r = s.getResume();
-//		List<Role> testResume = new ArrayList<Role>();
-//		testResume.add(currentRole);
-//		System.out.println(r.toArray());
-////		System.out.println(testResume.toArray());
-//		assertArrayEquals(r.toArray(), testResume.toArray());
-//	}
+	
+	@Test
+	public void testAddResumeItem() {
+		List<Role> test = s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
+		System.out.println(test.toArray()[0].toString());
+		List<Role> r = s.getResume();
+		List<Role> testResume = new ArrayList<Role>();
+		testResume.add(currentRole);
+		System.out.println(r.toArray());
+//		System.out.println(testResume.toArray());
+		assertArrayEquals(r.toArray(), testResume.toArray());
+	}
 
 }
