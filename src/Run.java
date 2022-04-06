@@ -89,6 +89,7 @@ public class Run {
 
 		Student createStudent = new Student(name, gradYear, initYear, isActive, isFall, voteElgible, school, major1, major2, minor1, minor2);
 		allStudents.add(createStudent);
+		updateJSON();
 		return name;
 	}
 
@@ -101,5 +102,13 @@ public class Run {
 		System.out.println("Q: to quit");
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
+	}
+	
+	private static void updateJSON() {
+		Gson gson = new Gson();
+		System.out.println(allStudents);
+		allStudents.get(0).displayAllInfo();
+		String json = gson.toJson(allStudents.get(0));
+		System.out.println(json);
 	}
 }

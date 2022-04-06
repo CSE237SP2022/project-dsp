@@ -19,8 +19,8 @@ public class RoleTests {
 	@Before
 	public void setup() {
 			Apple = new Company("Apple", "Tech", "Makes iPhones");
-			currentRole = new Role(Apple, "CEO", LocalDate.of(2020, 1, 8));
-			previousRole = new Role(Apple, "CEO", LocalDate.of(2020, 1, 8), LocalDate.of(2021, 2, 10));
+			currentRole = new Role(Apple, "CEO", 2020);
+			previousRole = new Role(Apple, "CEO", 2020, 2022);
 		}
 
 	@Test
@@ -47,22 +47,22 @@ public class RoleTests {
 	
 	@Test
 	public void testGetStartDate() {
-		LocalDate checkStart = currentRole.getStartDate();
-		assertEquals(checkStart, LocalDate.of(2020, 1, 8));
+		int checkStart = currentRole.getStartDate();
+		assertEquals(checkStart, 2020);
 	}
 	
 	@Test
 	public void testGetEndDate() {
-		LocalDate checkEndCurrent = currentRole.getEndDate();
-		LocalDate checkEndPrev = previousRole.getEndDate();
-		assertEquals(checkEndCurrent, null);
-		assertEquals(checkEndPrev, LocalDate.of(2021, 2, 10));
+		int checkEndCurrent = currentRole.getEndDate();
+		int checkEndPrev = previousRole.getEndDate();
+		assertEquals(checkEndCurrent, 0);
+		assertEquals(checkEndPrev, 2021);
 	}
 	
 	@Test
 	public void testTimeSpent() {
 		long timeSpent = previousRole.getTimeSpent();
-		assertEquals(timeSpent, 399);
+		assertEquals(timeSpent, 2);
 	}
 	
 	@Test
@@ -77,16 +77,17 @@ public class RoleTests {
 	@Test
 	public void testEndRoll() {
 		boolean checkCurrent = currentRole.getActive();
-		LocalDate checkEnd = currentRole.getEndDate();
+		int checkEnd = currentRole.getEndDate();
 		assertEquals(checkCurrent, true);
-		assertEquals(checkEnd, null);
+		System.out.println(checkEnd);
+		assertEquals(checkEnd, 2020);
 		
-		currentRole.endRoll(LocalDate.of(2022, 2, 10));
+		currentRole.endRoll(2022);
 		
 		checkCurrent = currentRole.getActive();
 		checkEnd = currentRole.getEndDate();
 		assertEquals(checkCurrent, false);
-		assertEquals(checkEnd, LocalDate.of(2022, 2, 10));
+		assertEquals(checkEnd, 2022);
 		
 	}
 }
