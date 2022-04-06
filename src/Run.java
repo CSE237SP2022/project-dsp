@@ -17,7 +17,6 @@ public class Run {
 
 		while(true) {
 			String userInput = menu_options(ap);
-			createStudentCommand(ap, userInput);
 			displayInfoCommand(ap, userInput);
 			quitCommand(userInput);
 			execCommands(ap, userInput);
@@ -45,7 +44,14 @@ public class Run {
 
 	private static void execCommands(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("rose")) {
-			String execCommand = ap.nextString("Welcome exec member. Press A to add events, R to remove brothers, \n C to change someone's points, or Q to quit");
+			System.out.println("S: create a student; R: remove a brother");
+			System.out.println("C: change someone's points");
+			System.out.println("Cr: create a company");
+			System.out.println("E: create an event");
+			System.out.println("A: Add events");
+			System.out.println("Q: to quit");
+			String execCommand = ap.nextString("Welcome exec member. Here are some commands");
+			execCreateStudentCommand(ap, execCommand);
 			execRemoveBrother(ap, execCommand);
 			execChangeBrotherPoints(ap, execCommand);
 			quitCommand(execCommand);
@@ -111,7 +117,7 @@ public class Run {
 	}
 
 
-	private static void createStudentCommand(ArgsProcessor ap, String userInput) {
+	private static void execCreateStudentCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("S")) {
 			studentName = createStudent(ap, userInput);
 		}
@@ -140,10 +146,7 @@ public class Run {
 	private static String menu_options(ArgsProcessor ap) {
 		//for future iteration, you'll need to login
 		System.out.println("Welcome to the DSP database. Here are some commands to use:");
-		System.out.println("S: create a student; DisplayInfo: show all information for student given full name");
-		System.out.println("C: create a company");
-		System.out.println("E: create an event");
-		System.out.println("Q: to quit");
+		System.out.println("Type DisplayInfo to show all information for student given full name");
 		System.out.println("If you're on exec, you can also type your secret key");
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
