@@ -1,8 +1,8 @@
 package src;
 
-public class Events {
+public class Event {
 
-	public Events() {
+	public Event() {
 		// TODO Auto-generated constructor stub
 	}
 
