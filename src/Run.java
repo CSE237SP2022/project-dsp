@@ -50,6 +50,7 @@ public class Run {
 			System.out.println("E: create an event");
 			System.out.println("A: Add events");
 			System.out.println("Q: to quit");
+			System.out.println("----------------------\n\n");
 			String execCommand = ap.nextString("Welcome exec member. Here are some commands");
 			execCreateStudentCommand(ap, execCommand);
 			execRemoveBrother(ap, execCommand);
@@ -68,7 +69,7 @@ public class Run {
 				if (allStudents.get(i).getName().equals(brotherName)) {
 					allStudents.get(i).addPoints(pointsChange);
 					System.out.println(pointsChange + " have been added to " + brotherName + ". Current points: " + allStudents.get(i).getPoints());
-					//TODO: probably can delete subtract points if we can just add a negative
+					System.out.println("----------------------\n\n");
 				}
 			}
 		}
@@ -81,7 +82,8 @@ public class Run {
 			for(int i=0; i<len; i++) {
 				if (allStudents.get(i).getName().equals(brotherName)) {
 					allStudents.remove(i);
-					System.out.println(brotherName + " has been removed. \n");
+					System.out.println(brotherName + " has been removed.");
+					System.out.println("----------------------\n\n");
 				}
 			}
 		}
@@ -106,10 +108,12 @@ public class Run {
 					else {
 						int numPoints = allStudents.get(i).getPoints();
 						System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
+						System.out.println("----------------------\n\n");
 					}
 				}
 				else {
-					System.out.println("Brother not found. \n");
+					System.out.println("Brother not found. Please check the spelling");
+					System.out.println("----------------------\n\n");
 				}
 			}
 
@@ -148,6 +152,7 @@ public class Run {
 		System.out.println("Welcome to the DSP database. Here are some commands to use:");
 		System.out.println("Type DisplayInfo to show all information for student given full name");
 		System.out.println("If you're on exec, you can also type your secret key");
+		System.out.println("----------------------\n\n");
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
 	}
