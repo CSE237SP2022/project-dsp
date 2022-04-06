@@ -112,7 +112,7 @@ public class Student {
 	}
 
 	public int subtractPoints(int newPoints) {
-		this.points += newPoints;
+		this.points -= newPoints;
 		return this.points;
 	}
 	
@@ -156,6 +156,13 @@ public class Student {
 		return this.voteElgible;
 	}
 	
+	public boolean willBeTrialed() {
+		if (this.points <= 60) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void displayAllInfo() {
 		System.out.println("Name: " + this.getName());
 		System.out.println("School: " + this.getSchool());
@@ -168,8 +175,30 @@ public class Student {
 		System.out.println("Brother is eligible for bid vote: " + this.getIsEligible());
 	}
 	
+	@Override
+	public String toString() {
+		String finalString = "Name: " + this.getName() + "\nSchool: " + this.getSchool() + "\nMajors: " + this.majors.toString() + "\nMinors: " + this.minors.toString();
+		finalString = finalString + "\nGraduation Year: " + this.getGradYear() + "\nInitiation Year: " + this.getInitYear() + "\nBrother is active: " + this.getIsActive();
+		finalString = finalString + "\nBrother joined in the fall: " + this.getIsFall() + "\nBrother is eligible for bid vote: " + this.getIsEligible();
+		return finalString;
+	}
+	
+	
 	public List<Role> getResume() {
 		return this.resume;
+	}
+	
+	public String printResume() {
+		String result = "";
+		for(int i = 0; i<this.resume.size(); i++) {
+			if(i == 0) {
+				result = this.getResumeItem(i).toString(); 				
+			}
+			else {
+				result = result + "\n" + this.getResumeItem(i); 
+			}
+		}
+		return result;
 	}
 	
 	public Role getResumeItem(int jobNumber) {
