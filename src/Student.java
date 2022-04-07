@@ -187,12 +187,6 @@ public class Student {
 		return this.resume;
 	}
 	
-	public List<Role> addResumeItem(Company roleCompany, String roleTitle, boolean roleActive, int roleDateStarted) {
-		Role newRole = new Role(roleCompany, roleTitle, roleActive, roleDateStarted);
-		this.resume.add(newRole);
-		return this.resume;
-	}
-	
 	public List<Role> removeRole(Role roleRemove) {
 		this.resume.remove(roleRemove);
 		return this.resume;

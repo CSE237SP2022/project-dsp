@@ -56,7 +56,7 @@ public class RoleTests {
 		int checkEndCurrent = currentRole.getEndDate();
 		int checkEndPrev = previousRole.getEndDate();
 		assertEquals(checkEndCurrent, 0);
-		assertEquals(checkEndPrev, 2021);
+		assertEquals(checkEndPrev, 2022);
 	}
 	
 	@Test
@@ -79,8 +79,7 @@ public class RoleTests {
 		boolean checkCurrent = currentRole.getActive();
 		int checkEnd = currentRole.getEndDate();
 		assertEquals(checkCurrent, true);
-		System.out.println(checkEnd);
-		assertEquals(checkEnd, 2020);
+		assertEquals(checkEnd, 0);
 		
 		currentRole.endRoll(2022);
 		

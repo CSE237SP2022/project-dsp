@@ -32,19 +32,9 @@ public class Role {
 		this.title = setTitle;
 		this.activeRole = true;
 		this.yearStarted = setyearStarted;
+		this.yearEnded = 0;
 	}
 	
-	public Role(Company setCompany, String setTitle, boolean setActiveRole, int setyearStarted) {
-		if(setCompany == null)
-			throw new IllegalArgumentException("Company can't be null");
-		if(setTitle == null)
-			throw new IllegalArgumentException("Title can't be null");
-		
-		this.company = setCompany;
-		this.title = setTitle;
-		this.activeRole = setActiveRole;
-		this.yearStarted = setyearStarted;
-	}
 	
 //	Get company
 	public Company getCompany() {
@@ -68,7 +58,7 @@ public class Role {
 	
 //	Get end date
 	public int getEndDate() {
-		return this.yearStarted;
+		return this.yearEnded;
 	}
 	
 //	get time spent in a role
