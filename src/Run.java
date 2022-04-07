@@ -1,6 +1,10 @@
 package src;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.*;
 
 import argsProcessor.ArgsProcessor;
 
@@ -11,6 +15,7 @@ public class Run {
 
 	public static List<Student> allStudents = new ArrayList<Student>();
 	public static String studentName;
+	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public static void main(String args[]) {
 		ArgsProcessor ap = new ArgsProcessor(args);
@@ -144,6 +149,7 @@ public class Run {
 
 		Student createStudent = new Student(name, gradYear, initYear, isActive, isFall, voteElgible, school, major1, major2, minor1, minor2);
 		allStudents.add(createStudent);
+		updateStudentJSON();
 		return name;
 	}
 
@@ -155,5 +161,14 @@ public class Run {
 		System.out.println("----------------------\n\n");
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
+	}
+	
+	private static void updateStudentJSON() {
+		try (Writer writer = new FileWriter("students.json")) {
+			gson.toJson(allStudents, writer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

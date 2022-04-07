@@ -1,58 +1,40 @@
 package src;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class Role {
 	
 	private Company company;
 	private String title;
 	private boolean activeRole;
-	private LocalDate dateStarted;
-	private LocalDate dateEnded;
+	private int yearStarted;
+	private int yearEnded;
 	
 	
-	public Role(Company setCompany, String setTitle, LocalDate setDateStarted, LocalDate setDateEnded) {
+	public Role(Company setCompany, String setTitle, int setyearStarted, int setyearEnded) {
 		if(setCompany == null)
 			throw new IllegalArgumentException("Company can't be null");
 		if(setTitle == null)
 			throw new IllegalArgumentException("Title can't be null");
-		if(setDateStarted == null)
-			throw new IllegalArgumentException("Date started can't be null");
 		
 		this.company = setCompany;
 		this.title = setTitle;
 		this.activeRole = false;
-		this.dateStarted = setDateStarted;
-		this.dateEnded = setDateEnded;
+		this.yearStarted = setyearStarted;
+		this.yearEnded = setyearEnded;
 	}
 	
-	public Role(Company setCompany, String setTitle, LocalDate setDateStarted) {
+	public Role(Company setCompany, String setTitle, int setyearStarted) {
 		if(setCompany == null)
 			throw new IllegalArgumentException("Company can't be null");
 		if(setTitle == null)
 			throw new IllegalArgumentException("Title can't be null");
-		if(setDateStarted == null)
-			throw new IllegalArgumentException("Date started can't be null");
 		
 		this.company = setCompany;
 		this.title = setTitle;
 		this.activeRole = true;
-		this.dateStarted = setDateStarted;
+		this.yearStarted = setyearStarted;
+		this.yearEnded = 0;
 	}
 	
-	public Role(Company setCompany, String setTitle, boolean setActiveRole, LocalDate setDateStarted) {
-		if(setCompany == null)
-			throw new IllegalArgumentException("Company can't be null");
-		if(setTitle == null)
-			throw new IllegalArgumentException("Title can't be null");
-		if(setDateStarted == null)
-			throw new IllegalArgumentException("Date started can't be null");
-		
-		this.company = setCompany;
-		this.title = setTitle;
-		this.activeRole = setActiveRole;
-		this.dateStarted = setDateStarted;
-	}
 	
 //	Get company
 	public Company getCompany() {
@@ -70,21 +52,21 @@ public class Role {
 	}
 	
 // Get start date
-	public LocalDate getStartDate() {
-		return this.dateStarted;
+	public int getStartDate() {
+		return this.yearStarted;
 	}
 	
 //	Get end date
-	public LocalDate getEndDate() {
-		return this.dateEnded;
+	public int getEndDate() {
+		return this.yearEnded;
 	}
 	
 //	get time spent in a role
 	public long getTimeSpent() {
-		if(this.dateEnded == null || this.dateStarted == null)
+		if(this.yearStarted == 0 || this.yearEnded == 0)
 			return 0;
 
-		long daysBetween = ChronoUnit.DAYS.between(this.dateStarted, this.dateEnded);
+		long daysBetween = this.yearEnded - this.yearStarted;
 		return daysBetween;
 	}
 
@@ -95,8 +77,8 @@ public class Role {
 		return this.title;
 	}
 	
-	public void endRoll(LocalDate endDate) {
-		this.dateEnded = endDate;
+	public void endRoll(int endDate) {
+		this.yearEnded = endDate;
 		this.activeRole = false;
 	}
 }

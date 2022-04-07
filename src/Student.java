@@ -1,5 +1,4 @@
 	package src;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,20 +204,14 @@ public class Student {
 		return this.resume.get(jobNumber);
 	}
 	
-	public List<Role> addResumeItem(Company roleCompany, String roleTitle, LocalDate roleDateStarted) {
+	public List<Role> addResumeItem(Company roleCompany, String roleTitle, int roleDateStarted) {
 		Role newRole = new Role(roleCompany, roleTitle, roleDateStarted);
 		this.resume.add(newRole);
 		return this.resume;
 	}
 	
-	public List<Role> addResumeItem(Company roleCompany, String roleTitle, LocalDate roleDateStarted, LocalDate roleDateEnded) {
+	public List<Role> addResumeItem(Company roleCompany, String roleTitle, int roleDateStarted, int roleDateEnded) {
 		Role newRole = new Role(roleCompany, roleTitle, roleDateStarted, roleDateEnded);
-		this.resume.add(newRole);
-		return this.resume;
-	}
-	
-	public List<Role> addResumeItem(Company roleCompany, String roleTitle, boolean roleActive, LocalDate roleDateStarted) {
-		Role newRole = new Role(roleCompany, roleTitle, roleActive, roleDateStarted);
 		this.resume.add(newRole);
 		return this.resume;
 	}
@@ -233,7 +226,7 @@ public class Student {
 		return this.resume;
 	}
 	
-	public List<Role> endResumeRoll(int roleIndex, LocalDate endDate) {
+	public List<Role> endResumeRoll(int roleIndex, int endDate) {
 		this.resume.get(roleIndex).endRoll(endDate);
 		return this.resume;
 	}
