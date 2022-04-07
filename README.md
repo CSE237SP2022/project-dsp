@@ -17,3 +17,7 @@ This iteration was spent outlining the framework for the rest of the project. We
 
 gson jar download:
 https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar
+
+https://medium.com/programmers-blockchain/importing-gson-into-eclipse-ec8cf678ad52 - guide to add to eclipse
+
+DO NOT PUT THE JAR FILE IN THE REPO
