@@ -1,8 +1,12 @@
 package src;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import com.google.gson.*;
 
@@ -19,7 +23,8 @@ public class Run {
 
 	public static void main(String args[]) {
 		ArgsProcessor ap = new ArgsProcessor(args);
-
+		readJSONs();
+		
 		while(true) {
 			String userInput = menu_options(ap);
 			displayInfoCommand(ap, userInput);
@@ -42,8 +47,6 @@ public class Run {
 		//			}
 		//			
 		//		}
-
-
 
 	}
 
@@ -73,6 +76,7 @@ public class Run {
 			for(int i=0; i<len; i++) {
 				if (allStudents.get(i).getName().equals(brotherName)) {
 					allStudents.get(i).addPoints(pointsChange);
+					updateStudentJSON();
 					System.out.println(pointsChange + " have been added to " + brotherName + ". Current points: " + allStudents.get(i).getPoints());
 					System.out.println("----------------------\n\n");
 				}
@@ -87,6 +91,7 @@ public class Run {
 			for(int i=0; i<len; i++) {
 				if (allStudents.get(i).getName().equals(brotherName)) {
 					allStudents.remove(i);
+					updateStudentJSON();
 					System.out.println(brotherName + " has been removed.");
 					System.out.println("----------------------\n\n");
 				}
@@ -148,6 +153,7 @@ public class Run {
 		String minor2 = ap.nextString("What is your second minor?");
 
 		Student createStudent = new Student(name, gradYear, initYear, isActive, isFall, voteElgible, school, major1, major2, minor1, minor2);
+		createStudent.displayAllInfo();
 		allStudents.add(createStudent);
 		updateStudentJSON();
 		return name;
@@ -166,6 +172,19 @@ public class Run {
 	private static void updateStudentJSON() {
 		try (Writer writer = new FileWriter("students.json")) {
 			gson.toJson(allStudents, writer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private static void readJSONs() {
+	    Reader reader;
+		try {
+			reader = Files.newBufferedReader(Paths.get("students.json"));
+		    List<Student> importStudentList = Arrays.asList(gson.fromJson(reader, Student[].class));
+		    importStudentList.forEach((student) -> allStudents.add(student));
+		    reader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
