@@ -17,5 +17,24 @@
       "asd"
     ],
     "resume": []
+  },
+  {
+    "name": "will",
+    "gradYear": 20212,
+    "initYear": 3221,
+    "points": 0,
+    "isActive": true,
+    "isFall": false,
+    "voteElgible": true,
+    "school": "olin",
+    "majors": [
+      "yes",
+      "a"
+    ],
+    "minors": [
+      "eqw",
+      "da"
+    ],
+    "resume": []
   }
 ]
