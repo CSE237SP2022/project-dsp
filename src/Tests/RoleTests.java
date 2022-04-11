@@ -2,8 +2,6 @@ package src.Tests;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -87,6 +85,13 @@ public class RoleTests {
 		checkEnd = currentRole.getEndDate();
 		assertEquals(checkCurrent, false);
 		assertEquals(checkEnd, 2022);
-		
+	}
+	
+	@Test
+	public void testToStringCurrent() {
+		System.out.println(currentRole.toString());
+		String output = currentRole.toString().replace("\n", "");
+		String result = "Company: Apple"+ "Title: CEO" + "Started: 2020";
+		assertEquals(output, result);
 	}
 }

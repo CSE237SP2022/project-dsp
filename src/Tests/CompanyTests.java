@@ -91,5 +91,12 @@ private Company Apple;
 		
 		assertEquals(checkName, returnV, 9);
 	}
+	
+	@Test
+	public void testToString() {
+		String output = Apple.toString().replace("\n", "");
+		String result = "Company Name: Apple" + "Industry: Tech" +  "Description: Makes iPhones" + "Student Count: 10";
+		assertEquals(result, output);
+	}
 
 }

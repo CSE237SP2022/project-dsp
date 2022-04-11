@@ -109,4 +109,9 @@ public class Company {
 		return this.numStudents;
 	}
 
+	@Override
+	public String toString() {
+		return "Company Name: " + this.getName() + "\nIndustry: " + this.getIndustry() + "\nDescription: " + this.getDescription() + "\nStudent Count: " + this.getNumStudents();
+	}
+
 }
