@@ -19,14 +19,12 @@ public class StudentTests {
 	private Student s;
 	private Company company;
 	private Role currentRole;
-	private Role previousRole;
 	
 	@Before
 	public void setup() {
 			s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
 			company = new Company("Apple", "Tech", "Makes iPhones");
 			currentRole = new Role(company, "CEO", LocalDate.of(2020, 1, 8));
-			previousRole = new Role(company, "CEO", LocalDate.of(2020, 1, 8), LocalDate.of(2021, 2, 10));
 		}
 
 	@Test
@@ -165,14 +163,13 @@ public class StudentTests {
 	
 	@Test
 	public void testAddResumeItem() {
-		List<Role> test = s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
-		System.out.println(test.toArray()[0].toString());
+		s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
 		List<Role> r = s.getResume();
+		
 		List<Role> testResume = new ArrayList<Role>();
 		testResume.add(currentRole);
-		System.out.println(r.toArray());
-//		System.out.println(testResume.toArray());
-		assertArrayEquals(r.toArray(), testResume.toArray());
+		
+		assertEquals(r.toString(), testResume.toString());
 	}
 
 }
