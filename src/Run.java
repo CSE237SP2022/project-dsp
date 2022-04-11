@@ -32,37 +32,22 @@ public class Run {
 			execCommands(ap, userInput);
 
 		}
-
-		//		String choice = ap.nextString("Please type Login or Register.");
-
-		//		if (choice == "Login") {
-		//			
-		//			String username = ap.nextString("Username:");
-		//			String password = ap.nextString("Password:");
-		//			
-		//			while (Login.login(username, password)==false) {
-		//				System.out.println("Try again!");
-		//				username = ap.nextString("Username:");
-		//				password = ap.nextString("Password:");
-		//			}
-		//			
-		//		}
-
 	}
 
 	private static void execCommands(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("rose")) {
-			System.out.println("S: create a student; R: remove a brother");
+			System.out.println("S: create a brother; R: remove a brother");
 			System.out.println("C: change someone's points");
+			System.out.println("AllPoints: view all brothers and their points");
 			System.out.println("Cr: create a company");
 			System.out.println("E: create an event");
-			System.out.println("A: Add events");
 			System.out.println("Q: to quit");
 			System.out.println("----------------------\n\n");
 			String execCommand = ap.nextString("Welcome exec member. Here are some commands");
 			execCreateStudentCommand(ap, execCommand);
 			execRemoveBrother(ap, execCommand);
 			execChangeBrotherPoints(ap, execCommand);
+			execDisplayAllPoints(ap, execCommand);
 			quitCommand(execCommand);
 			//TODO: add events command
 		}
@@ -127,6 +112,15 @@ public class Run {
 				}
 			}
 
+		}
+	}
+	
+	public static void execDisplayAllPoints(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("AllPoints")) {
+			int len=allStudents.size();
+			for(int i=0; i<len; i++) {
+				System.out.printf("%-20s %s\n", allStudents.get(i).getName(), allStudents.get(i).getPoints());
+			}
 		}
 	}
 
