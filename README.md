@@ -12,12 +12,13 @@ This will be a "points" tracker for the active DSP brothers — Alpha Chi chapte
     
     
 TODO:    
-This iteration was spent outlining the framework for the rest of the project. We created student, event, and company classes. For this iteration we spent our efforts on the student class, creating tests for primarily getters and setters. There are some aspects such as "resume" objects that don't work yet. We also make the code functionable in our run.java file, which includes main() and right now allows the user to add new members and display a person's information. Functions related to events and companies have not been implemented yet.
 
+This iteration was spent polishing the student class and main method abilities, adding an admin privilege, and storing student information in JSON. We created a passcode-like product in which admin privileges can be accessed by typing in “rose” in the initial user input. Admins are granted additional capabilities of creating a brother, removing a brother and changing points. We are still working on implementing “add company” and “add event” to admin privileges. The resume properties and event properties have not been fully implemented yet.
 
-gson jar download:
-https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar
+Another part of our second iteration is incorporating JSON to store our information. In order to run our code, the user must have gson set up. Below we have added some basic instructions for how to set this up:
 
-https://medium.com/programmers-blockchain/importing-gson-into-eclipse-ec8cf678ad52 - guide to add to eclipse
+- download this JSON jar file: [https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar)
+- follow instructions on this easy-to-follow website to incorporate the newly downloaded file in java user libraries [https://medium.com/programmers-blockchain/importing-gson-into-eclipse-ec8cf678ad52](https://medium.com/programmers-blockchain/importing-gson-into-eclipse-ec8cf678ad52)
+- Once downloaded, navigate to eclipse. Right click the project folder → build path → configure build path → libraries (top tab bar) → click on the gson file you just downloaded → click the edit button → edit the path to be where the file is on your device
 
-DO NOT PUT THE JAR FILE IN THE REPO
+Gson is now ready to be used, and our main method is able to be run. We incorporated JSON in this iteration with two methods, a read JSON method and a right to JSON method. The read JSON method calls the method in main, and the righttoJSON method is called anytime you update all students, and rewrites over the old file each time.
