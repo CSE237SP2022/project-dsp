@@ -91,7 +91,7 @@ public class RoleTests {
 	public void testToStringCurrent() {
 		System.out.println(currentRole.toString());
 		String output = currentRole.toString().replace("\n", "");
-		String result = "Company: Apple"+ "Title: CEO" + "Started: 2020-01-08";
+		String result = "Company: Apple"+ "Title: CEO" + "Started: 2020";
 		assertEquals(output, result);
 	}
 }
