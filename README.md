@@ -1,14 +1,12 @@
 This will be a "points" tracker for the active DSP brothers — Alpha Chi chapter (WashU)
 
 - **Key features** 
-    -brothers can view their points
-    -admin have extra features with a "password" - password: rose
-    -admin can add and remove brothers, change points, view a list of all brothers + points
-    -brother information is stored in a gson file
+    -*brothers can view their points*
+    -*admin have extra features with a "password" - password: rose*
+    -*admin can add and remove brothers, change points, view a list of all brothers + points*
+    -*brother information is stored in a gson file*
     
     
-TODO:    
-
 This iteration was spent polishing the student class and main method abilities, adding an admin privilege, and storing student information in JSON. We created a passcode-like product in which admin privileges can be accessed by typing in “rose” in the initial user input. Admins are granted additional capabilities of creating a brother, removing a brother and changing points. We are still working on implementing “add company” and “add event” to admin privileges. The resume properties and event properties have not been fully implemented yet.
 
 Another part of our second iteration is incorporating JSON to store our information. In order to run our code, the user MUST have gson set up. Below we have added some basic instructions for how to set this up:
