@@ -43,14 +43,18 @@ public class Run {
 			System.out.println("E: create an event");
 			System.out.println("Q: to quit");
 			System.out.println("----------------------\n\n");
-			String execCommand = ap.nextString("Welcome exec member. Here are some commands");
-			execCreateStudentCommand(ap, execCommand);
-			execRemoveBrother(ap, execCommand);
-			execChangeBrotherPoints(ap, execCommand);
-			execDisplayAllPoints(ap, execCommand);
-			quitCommand(execCommand);
+			allExecCommands(ap);
 			//TODO: add events command
 		}
+	}
+
+	private static void allExecCommands(ArgsProcessor ap) {
+		String execCommand = ap.nextString("Welcome exec member. Here are some commands");
+		execCreateStudentCommand(ap, execCommand);
+		execRemoveBrother(ap, execCommand);
+		execChangeBrotherPoints(ap, execCommand);
+		execDisplayAllPoints(ap, execCommand);
+		quitCommand(execCommand);
 	}
 
 	private static void execChangeBrotherPoints(ArgsProcessor ap, String userInput) {
@@ -94,25 +98,33 @@ public class Run {
 		if (userInput.equals("DisplayInfo")) {
 			String nameSearch = ap.nextString("What is the name of the member you want to display information for?");
 			boolean showPoints = ap.nextBoolean("Do you only want to see your points? true/false");
-			int len=allStudents.size();
-			for(int i=0; i<len; i++) {
-				if (allStudents.get(i).getName().equals(nameSearch)) {
-					if (!showPoints) {
-						allStudents.get(i).displayAllInfo();
-					}
-					else {
-						int numPoints = allStudents.get(i).getPoints();
-						System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
-						System.out.println("----------------------\n\n");
-					}
+			boolean brotherFound = searchBrotherName(nameSearch, showPoints);
+			if (!brotherFound) {
+				System.out.println("Brother not found. Please check the spelling");
+				System.out.println("----------------------\n\n");
+			}
+		}
+			
+
+	}
+
+	private static boolean searchBrotherName(String nameSearch, boolean showPoints) {
+		boolean brotherFound = false;
+		int len=allStudents.size();
+		for(int i=0; i<len; i++) {
+			if (allStudents.get(i).getName().equals(nameSearch)) {
+				brotherFound = true;
+				if (!showPoints) {
+					allStudents.get(i).displayAllInfo();
 				}
 				else {
-					System.out.println("Brother not found. Please check the spelling");
+					int numPoints = allStudents.get(i).getPoints();
+					System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
 					System.out.println("----------------------\n\n");
 				}
 			}
-
 		}
+		return brotherFound;
 	}
 	
 	public static void execDisplayAllPoints(ArgsProcessor ap, String userInput) {
