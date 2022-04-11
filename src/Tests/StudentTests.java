@@ -2,7 +2,6 @@ package src.Tests;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +24,8 @@ public class StudentTests {
 	public void setup() {
 			s = new Student("Gavin Frank", 2024, 10, true, false, false, "Olin", "Business", "CS", "Psych", "NA");
 			company = new Company("Apple", "Tech", "Makes iPhones");
-			currentRole = new Role(company, "CEO", LocalDate.of(2020, 1, 8));
-			previousRole = new Role(company, "CEO", LocalDate.of(2020, 1, 8), LocalDate.of(2021, 2, 10));
+			currentRole = new Role(company, "CEO", 2020);
+			previousRole = new Role(company, "CEO", 2020, 2021);
 		}
 
 	@Test
@@ -150,22 +149,22 @@ public class StudentTests {
 	
 	@Test
 	public void testResumePrint() {
-		s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
-		s.addResumeItem(company, "test2", LocalDate.of(2020, 1, 8));
+		s.addResumeItem(company, "CEO", 2020);
+		s.addResumeItem(company, "test2", 2020);
 		
 		String resume = s.printResume().replace("\n", "");
 		String output = "Company: Apple"
 				+ "Title: CEO"
-				+ "Started: 2020-01-08"
+				+ "Started: 2020"
 				+ "Company: Apple"
 				+ "Title: test2"
-				+ "Started: 2020-01-08";
+				+ "Started: 2020";
 		assertEquals(resume, output);
 	}
 	
 	@Test
 	public void testAddResumeItem1() {
-		 s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8));
+		 s.addResumeItem(company, "CEO", 2020);
 		List<Role> r = s.getResume();
 		
 		List<Role> testResume = new ArrayList<Role>();
@@ -176,7 +175,7 @@ public class StudentTests {
 	
 	@Test
 	public void testAddResumeItem2() {
-		 s.addResumeItem(company, "CEO", LocalDate.of(2020, 1, 8), LocalDate.of(2021, 2, 10));
+		 s.addResumeItem(company, "CEO", 2020, 2021);
 		List<Role> r = s.getResume();
 		
 		List<Role> testResume = new ArrayList<Role>();
@@ -184,6 +183,85 @@ public class StudentTests {
 		
 		assertEquals(r.toString(), testResume.toString());
 	}
+	
+	@Test
+	public void testRemoveResumeItem1() {
+		s.addResumeItem(company, "CEO", 2020);
+		s.addResumeItem(company, "CEO", 2020, 2021);
+		List<Role> r = s.getResume();
+		
+		List<Role> testResume = new ArrayList<Role>();
+		testResume.add(currentRole);
+		testResume.add(previousRole);
+		
+		assertEquals(r.toString(), testResume.toString());
+		
+		s.removeRole(r.get(0));
+		List<Role> r2 = s.getResume();
+		
+		testResume.remove(currentRole);
+		assertEquals(r2.toString(), testResume.toString());
+	}
 
+	@Test
+	public void testRemoveResumeItem2() {
+		s.addResumeItem(company, "CEO", 2020);
+		s.addResumeItem(company, "CEO", 2020, 2021);
+		List<Role> r = s.getResume();
+		
+		List<Role> testResume = new ArrayList<Role>();
+		testResume.add(currentRole);
+		testResume.add(previousRole);
+		
+		assertEquals(r.toString(), testResume.toString());
+		
+		s.removeRole(0);
+		List<Role> r2 = s.getResume();
+		
+		testResume.remove(currentRole);
+		assertEquals(r2.toString(), testResume.toString());
+	}
+
+	@Test
+	public void testGetResume() {
+		s.addResumeItem(company, "CEO", 2020);
+		List<Role> r = s.getResume();
+		
+		List<Role> testResume = new ArrayList<Role>();
+		testResume.add(currentRole);
+		
+		assertEquals(r.toString(), testResume.toString());
+	}
+	
+	@Test
+	public void testGetResumeItem() {
+		s.addResumeItem(company, "CEO", 2020);
+		Role r = s.getResumeItem(0);
+	
+		assertEquals(r.toString(), currentRole.toString());
+	}
+	
+	@Test
+	public void testEndResumeRoll() {
+		s.addResumeItem(company, "CEO", 2020);
+		
+		s.endResumeRoll(0, 2021);
+		Role r = s.getResumeItem(0);		
+		
+		assertEquals(r.toString(), previousRole.toString());
+	}
+	
+	
+	@Test
+	public void testUpdateResumeRoll() {
+		s.addResumeItem(company, "CEO", 2020);
+		
+		s.updateResumeRollTitle(0, "CFO");
+		Role r = s.getResumeItem(0);		
+		
+		Role testRole = new Role(company, "CFO", 2020);
+		
+		assertEquals(r.toString(), testRole.toString());
+	}
 
 }
