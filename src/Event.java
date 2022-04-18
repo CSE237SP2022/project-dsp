@@ -18,7 +18,6 @@ public class Event {
 		return this.dateOfEvent;
 	}
 	
-
 	public String getName() {
 		return this.nameOfEvent;
 	}
@@ -27,7 +26,6 @@ public class Event {
 		return this.pointsForEvent;
 	}
 	
-
 	public boolean isRequired() {
 		return this.isRequired;
 	}

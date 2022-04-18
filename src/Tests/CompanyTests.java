@@ -19,61 +19,61 @@ private Company Apple;
 	@Test
 	public void testGetName() {
 		String checkName = Apple.getName();
-		assertEquals(checkName, "Apple");
+		assertEquals("Apple", checkName);
 	}
 	
 	@Test
 	public void testGetIndustry() {
 		String checkName = Apple.getIndustry();
-		assertEquals(checkName, "Tech");
+		assertEquals("Tech", checkName);
 	}
 	
 	@Test
 	public void testGetDescription() {
 		String checkName = Apple.getDescription();
-		assertEquals(checkName, "Makes iPhones");
+		assertEquals("Makes iPhones", checkName);
 	}
 	
 	@Test
 	public void testGetNumStudents() {
 		int checkName = Apple.getNumStudents();
-		assertEquals(checkName, 10);
+		assertEquals(10, checkName);
 	}
 	
 	@Test
 	public void testUpdateName() {
 		String checkName = Apple.getName();
-		assertEquals(checkName, "Apple");
+		assertEquals("Apple", checkName);
 		
 		Apple.updateName("Google");
 		checkName = Apple.getName();
-		assertEquals(checkName, "Google");
+		assertEquals("Google", checkName);
 	}
 	
 	@Test
 	public void testUpdateIndustry() {
 		String checkName = Apple.getIndustry();
-		assertEquals(checkName, "Tech");
+		assertEquals("Tech", checkName);
 		
 		Apple.updateIndustry("Finance");
 		checkName = Apple.getIndustry();
-		assertEquals(checkName, "Finance");
+		assertEquals("Finance", checkName);
 	}
 	
 	@Test
 	public void testUpdateDescription() {
 		String checkName = Apple.getDescription();
-		assertEquals(checkName, "Makes iPhones");
+		assertEquals("Makes iPhones", checkName);
 
 		Apple.updateDescription("Makes airpods");
 		checkName = Apple.getDescription();
-		assertEquals(checkName, "Makes airpods");
+		assertEquals("Makes airpods", checkName);
 	}
 	
 	@Test
 	public void testJoinCompany() {
 		int checkName = Apple.getNumStudents();
-		assertEquals(checkName, 10);
+		assertEquals(10, checkName);
 		
 		int returnV = Apple.joinCompany();
 		checkName = Apple.getNumStudents();
