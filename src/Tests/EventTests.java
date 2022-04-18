@@ -1,13 +1,13 @@
 package src.Tests;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import src.Event;
 
-import static org.junit.Assert.assertEquals;
-
-public class EventsTests {
+public class EventTests {
 
 	private Event e;
 	

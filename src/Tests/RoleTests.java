@@ -24,13 +24,13 @@ public class RoleTests {
 	@Test
 	public void testGetCompany() {
 		Company retrieveCompany = currentRole.getCompany();
-		assertEquals(retrieveCompany, Apple);
+		assertEquals(Apple, retrieveCompany);
 	}
 	
 	@Test
 	public void testGetTitle() {
 		String retrieveTitle = currentRole.getTitle();
-		assertEquals(retrieveTitle, "CEO");
+		assertEquals("CEO", retrieveTitle);
 	}
 	
 	@Test
@@ -38,53 +38,53 @@ public class RoleTests {
 		boolean checkCurrent = currentRole.getActive();
 		boolean checkPrevious = previousRole.getActive();
 		
-		assertEquals(checkCurrent, true);
-		assertEquals(checkPrevious, false);
-		assertNotEquals(checkCurrent, checkPrevious);
+		assertEquals(true, checkCurrent);
+		assertEquals(false, checkPrevious);
+		assertNotEquals(checkPrevious, checkCurrent);
 	}
 	
 	@Test
 	public void testGetStartDate() {
 		int checkStart = currentRole.getStartDate();
-		assertEquals(checkStart, 2020);
+		assertEquals(2020, checkStart);
 	}
 	
 	@Test
 	public void testGetEndDate() {
 		int checkEndCurrent = currentRole.getEndDate();
 		int checkEndPrev = previousRole.getEndDate();
-		assertEquals(checkEndCurrent, 0);
-		assertEquals(checkEndPrev, 2022);
+		assertEquals(0, checkEndCurrent);
+		assertEquals(2022, checkEndPrev);
 	}
 	
 	@Test
 	public void testTimeSpent() {
 		long timeSpent = previousRole.getTimeSpent();
-		assertEquals(timeSpent, 2);
+		assertEquals(2, timeSpent);
 	}
 	
 	@Test
 	public void testUpdateTitle() {
 		String retrieveTitle = currentRole.getTitle();
-		assertEquals(retrieveTitle, "CEO");
+		assertEquals("CEO", retrieveTitle);
 		currentRole.updateTitle("COO");
 		retrieveTitle = currentRole.getTitle();
-		assertEquals(retrieveTitle, "COO");
+		assertEquals("COO", retrieveTitle);
 	}
 	
 	@Test
 	public void testEndRoll() {
 		boolean checkCurrent = currentRole.getActive();
 		int checkEnd = currentRole.getEndDate();
-		assertEquals(checkCurrent, true);
-		assertEquals(checkEnd, 0);
+		assertEquals(true, checkCurrent);
+		assertEquals(0, checkEnd);
 		
 		currentRole.endRoll(2022);
 		
 		checkCurrent = currentRole.getActive();
 		checkEnd = currentRole.getEndDate();
-		assertEquals(checkCurrent, false);
-		assertEquals(checkEnd, 2022);
+		assertEquals(false, checkCurrent);
+		assertEquals(2022, checkEnd);
 	}
 	
 	@Test
