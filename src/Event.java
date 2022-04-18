@@ -31,6 +31,11 @@ public class Event {
 	public boolean isRequired() {
 		return this.isRequired;
 	}
+	
+	@Override
+	public String toString() {
+		return "Event Name: " + this.nameOfEvent + "\nDate of Event: " + this.dateOfEvent + "\nPoints Worth: " + this.pointsForEvent + "\nRequired Event: " + this.isRequired;
+	}
 }
 
 
