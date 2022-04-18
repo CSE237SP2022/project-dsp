@@ -27,7 +27,7 @@ public class Menu {
 	public static void main(String args[]) {
 		ArgsProcessor ap = new ArgsProcessor(args);
 		readJSONs();
-
+		
 		while(true) {
 			String userInput = menu_options(ap);
 			commandMaster(ap, userInput);
@@ -228,12 +228,17 @@ public class Menu {
 	}
 
 	private static void readJSONs() {
-		Reader reader;
 		try {
-			reader = Files.newBufferedReader(Paths.get("students.json"));
-			List<Student> importStudentList = Arrays.asList(gson.fromJson(reader, Student[].class));
+			Reader readerStudents = Files.newBufferedReader(Paths.get("students.json"));
+			List<Student> importStudentList = Arrays.asList(gson.fromJson(readerStudents, Student[].class));
 			importStudentList.forEach((student) -> allStudents.add(student));
-			reader.close();
+			readerStudents.close();
+			
+			Reader readerEvents = Files.newBufferedReader(Paths.get("events.json"));
+			List<Event> importEventsList = Arrays.asList(gson.fromJson(readerEvents, Event[].class));
+			importEventsList.forEach((event) -> allEvents.add(event));
+			readerEvents.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
