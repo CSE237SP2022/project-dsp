@@ -12,26 +12,33 @@ import com.google.gson.*;
 
 import argsProcessor.ArgsProcessor;
 
-public class Run {
-	
+public class Menu {
+
 	//TODO: can all the iterating be done in an individual method and then do .command on that method?
 	//TODO: stay in "exec" mode until quit
+	//TODO: error if you click cancel on argsprocessor
 
 	public static List<Student> allStudents = new ArrayList<Student>();
+	public static List<Event> allEvents = new ArrayList<Event>();
 	public static String studentName;
+	public static String eventName;
 	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
 	public static void main(String args[]) {
 		ArgsProcessor ap = new ArgsProcessor(args);
 		readJSONs();
-		
+
 		while(true) {
 			String userInput = menu_options(ap);
-			displayInfoCommand(ap, userInput);
-			quitCommand(userInput);
-			execCommands(ap, userInput);
-
+			commandMaster(ap, userInput);
 		}
+	}
+
+	private static void commandMaster(ArgsProcessor ap, String userInput) {
+		displayInfoCommand(ap, userInput);
+		displayEventsCommand(ap, userInput);
+		quitCommand(userInput);
+		execCommands(ap, userInput);
 	}
 
 	private static void execCommands(ArgsProcessor ap, String userInput) {
@@ -44,7 +51,7 @@ public class Run {
 			System.out.println("Q: to quit");
 			System.out.println("----------------------\n\n");
 			allExecCommands(ap);
-			//TODO: add events command
+			//TODO: add display events command
 		}
 	}
 
@@ -54,6 +61,7 @@ public class Run {
 		execRemoveBrother(ap, execCommand);
 		execChangeBrotherPoints(ap, execCommand);
 		execDisplayAllPoints(ap, execCommand);
+		execCreateEventCommand(ap, execCommand);
 		quitCommand(execCommand);
 	}
 
@@ -71,6 +79,23 @@ public class Run {
 				}
 			}
 		}
+	}
+	
+	private static void execCreateEventCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("E")) {
+			eventName = createEvent(ap, userInput);
+		}
+	}
+
+	private static String createEvent(ArgsProcessor ap, String userInput) {
+		String dateOfEvent = ap.nextString("What is the date of the event");
+		String nameOfEvent = ap.nextString("What is the name of the event");
+		int pointsForEvent = ap.nextInt("How many points is this event worth");
+		boolean isRequired = ap.nextBoolean("Is the event required? true/false");
+		Event createEvent = new Event(dateOfEvent, nameOfEvent, pointsForEvent, isRequired);
+		allEvents.add(createEvent);
+		updateEventJSON();
+		return nameOfEvent;
 	}
 
 	private static void execRemoveBrother(ArgsProcessor ap, String userInput) {
@@ -93,7 +118,7 @@ public class Run {
 			return;
 		}
 	}
-	
+
 	private static void displayInfoCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("DisplayInfo")) {
 			String nameSearch = ap.nextString("What is the name of the member you want to display information for?");
@@ -104,8 +129,15 @@ public class Run {
 				System.out.println("----------------------\n\n");
 			}
 		}
-			
-
+	}
+	
+	private static void displayEventsCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("Events")) {
+			int len=allEvents.size();
+			for(int i=0; i<len; i++) {
+				System.out.printf("%-20s %s\n", allEvents.get(i).getDate(), allEvents.get(i).getName());
+			}
+		}
 	}
 
 	private static boolean searchBrotherName(String nameSearch, boolean showPoints) {
@@ -126,13 +158,14 @@ public class Run {
 		}
 		return brotherFound;
 	}
-	
+
 	public static void execDisplayAllPoints(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("AllPoints")) {
 			int len=allStudents.size();
 			for(int i=0; i<len; i++) {
 				System.out.printf("%-20s %s\n", allStudents.get(i).getName(), allStudents.get(i).getPoints());
 			}
+			System.out.println("----------------------\n\n");
 		}
 	}
 
@@ -169,12 +202,13 @@ public class Run {
 		//for future iteration, you'll need to login
 		System.out.println("Welcome to the DSP database. Here are some commands to use:");
 		System.out.println("Type DisplayInfo to show all information for student given full name");
+		System.out.println("Type Events to see a list of all DSP events");
 		System.out.println("If you're on exec, you can also type your secret key");
 		System.out.println("----------------------\n\n");
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
 	}
-	
+
 	private static void updateStudentJSON() {
 		try (Writer writer = new FileWriter("students.json")) {
 			gson.toJson(allStudents, writer);
@@ -183,14 +217,23 @@ public class Run {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private static void updateEventJSON() {
+		try (Writer writer = new FileWriter("events.json")) {
+			gson.toJson(allEvents, writer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	private static void readJSONs() {
-	    Reader reader;
+		Reader reader;
 		try {
 			reader = Files.newBufferedReader(Paths.get("students.json"));
-		    List<Student> importStudentList = Arrays.asList(gson.fromJson(reader, Student[].class));
-		    importStudentList.forEach((student) -> allStudents.add(student));
-		    reader.close();
+			List<Student> importStudentList = Arrays.asList(gson.fromJson(reader, Student[].class));
+			importStudentList.forEach((student) -> allStudents.add(student));
+			reader.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
