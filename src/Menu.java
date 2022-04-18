@@ -46,6 +46,7 @@ public class Menu {
 			System.out.println("S: create a brother; R: remove a brother");
 			System.out.println("C: change someone's points");
 			System.out.println("AllPoints: view all brothers and their points");
+			System.out.println("AllEvents: view all brothers and their events");
 			System.out.println("Cr: create a company");
 			System.out.println("E: create an event");
 			System.out.println("Q: to quit");
@@ -86,6 +87,7 @@ public class Menu {
 			eventName = createEvent(ap, userInput);
 		}
 	}
+	
 
 	private static String createEvent(ArgsProcessor ap, String userInput) {
 		String dateOfEvent = ap.nextString("What is the date of the event");
@@ -168,7 +170,18 @@ public class Menu {
 			System.out.println("----------------------\n\n");
 		}
 	}
-
+	
+	public static void execDisplayAllEvents(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("AllEvents")) {
+			int len=allStudents.size();
+			for(int i=0; i<len; i++) {
+				System.out.printf(allEvents.get(i).toString());
+			}
+			System.out.println("----------------------\n\n");
+		}
+	}
+	
+	
 
 	private static void execCreateStudentCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("S")) {
