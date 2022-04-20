@@ -42,10 +42,21 @@
           "industry": "Tech",
           "description": "Steve Jobs"
         },
-        "title": "CEO",
+        "title": "COO",
         "activeRole": false,
         "yearStarted": 2011,
         "yearEnded": 2021
+      },
+      {
+        "company": {
+          "name": "Monster",
+          "industry": "energy drinks",
+          "description": "zoom"
+        },
+        "title": "CPO",
+        "activeRole": false,
+        "yearStarted": 2019,
+        "yearEnded": 2022
       }
     ]
   },

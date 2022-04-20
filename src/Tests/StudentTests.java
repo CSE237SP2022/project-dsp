@@ -270,12 +270,34 @@ public class StudentTests {
 		assertEquals(r.toString(), previousRole.toString());
 	}
 	
+	@Test
+	public void testEndResumeRoll2() {
+		s.addResumeItem(company, "CEO", 2020);
+		
+		s.endResumeRoll(company.getName(), 2021);
+		Role r = s.getResumeItem(0);		
+		
+		assertEquals(r.toString(), previousRole.toString());
+	}
+	
 	
 	@Test
 	public void testUpdateResumeRoll() {
 		s.addResumeItem(company, "CEO", 2020);
 		
 		s.updateResumeRollTitle(0, "CFO");
+		Role r = s.getResumeItem(0);		
+		
+		Role testRole = new Role(company, "CFO", 2020);
+		
+		assertEquals(r.toString(), testRole.toString());
+	}
+	
+	@Test
+	public void testUpdateResumeRoll2() {
+		s.addResumeItem(company, "CEO", 2020);
+		
+		s.updateResumeRollTitle(company.getName(), "CFO");
 		Role r = s.getResumeItem(0);		
 		
 		Role testRole = new Role(company, "CFO", 2020);
