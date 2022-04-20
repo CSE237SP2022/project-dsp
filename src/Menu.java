@@ -40,6 +40,7 @@ public class Menu {
 		displayEventsCommand(ap, userInput);
 		displayCompaniesCommand(ap, userInput);
 		createCompanyCommand(ap, userInput);
+		addResumeCommand(ap, userInput);
 		quitCommand(userInput);
 		execCommands(ap, userInput);
 	}
@@ -162,14 +163,60 @@ public class Menu {
 	private static void createCompanyCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("CreateCompany")) {
 			String nameOfCompany = ap.nextString("What is the name of the company?");
-			String industry = ap.nextString("What is the industry of the company?");
-			String description = ap.nextString("What is the company description?");
-			Company createCompany = new Company(nameOfCompany, industry, description);
-			allCompanies.add(createCompany);
-			updateCompanyJSON();
+			createCompanyHelper(ap, nameOfCompany);
 		}
 	}
+	
+	private static Company createCompanyHelper(ArgsProcessor ap, String nameOfCompany) {
+		String industry = ap.nextString("What is the industry of the company?");
+		String description = ap.nextString("What is the company description?");
+		Company createCompany = new Company(nameOfCompany, industry, description);
+		allCompanies.add(createCompany);
+		updateCompanyJSON();
+		return createCompany;
+	}
+	 
 
+	private static void addResumeCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("AddResume")) {
+			String nameSearch = ap.nextString("What is the name of the member you want to add a resume item for?");
+			
+			for(int i=0; i<allStudents.size(); i++) {
+				if (allStudents.get(i).getName().equals(nameSearch)) {
+					Company companyInsert = resumeCompanyHelper(ap);
+					int companyInsertIndex = allCompanies.indexOf(companyInsert);
+
+					String roleName = ap.nextString("What is the title of the role?");
+					boolean isActive = ap.nextBoolean("Is this an active role? true/false");
+					int yearStarted = ap.nextInt("What year did you start the positon?");
+					
+					Role newRole = null;
+					if(isActive) {
+						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted);
+					}
+					else {
+						int yearEnded = ap.nextInt("What year did you end the positon?");
+						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted, yearEnded);
+					}
+					allCompanies.get(companyInsertIndex).joinCompany();
+					updateStudentJSON();
+					updateCompanyJSON();
+					break;
+				}
+			}
+		}
+	}
+	
+	private static Company resumeCompanyHelper(ArgsProcessor ap) {
+		String companySearch = ap.nextString("What is the name of the company?");
+		for(int j =0; j< allCompanies.size(); j++) {
+			if (allCompanies.get(j).getName().equals(companySearch)) {
+				return allCompanies.get(j);
+			}
+		}
+		return createCompanyHelper(ap, companySearch);
+	}
+	
 	private static boolean searchBrotherName(String nameSearch, boolean showPoints) {
 		boolean brotherFound = false;
 		int len=allStudents.size();
@@ -235,6 +282,7 @@ public class Menu {
 		System.out.println("Type Events to see a list of all DSP events");
 		System.out.println("Type Companies to see a list of all DSP companies");
 		System.out.println("Type CreateCompany to create a company");
+		System.out.println("Type AddResume to add a resume item to a brother");
 		System.out.println("Type Q to quit");
 		System.out.println("If you're on exec, you can also type your secret key");
 		System.out.println("----------------------\n\n");

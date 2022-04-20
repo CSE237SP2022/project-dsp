@@ -35,7 +35,20 @@
       "eqw",
       "da"
     ],
-    "resume": []
+    "resume": [
+      {
+        "company": {
+          "name": "Apple",
+          "industry": "Tech",
+          "description": "Steve Jobs",
+          "numStudents": 1
+        },
+        "title": "CEO",
+        "activeRole": false,
+        "yearStarted": 2011,
+        "yearEnded": 2021
+      }
+    ]
   },
   {
     "name": "gavin",
