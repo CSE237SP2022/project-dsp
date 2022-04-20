@@ -14,10 +14,6 @@ import argsProcessor.ArgsProcessor;
 
 public class Menu {
 
-	//TODO: can all the iterating be done in an individual method and then do .command on that method?
-	//TODO: stay in "exec" mode until quit
-	//TODO: error if you click cancel on argsprocessor
-
 	public static List<Student> allStudents = new ArrayList<Student>();
 	public static List<Event> allEvents = new ArrayList<Event>();
 	public static String studentName;
@@ -27,9 +23,13 @@ public class Menu {
 	public static void main(String args[]) {
 		ArgsProcessor ap = new ArgsProcessor(args);
 		readJSONs();
+		boolean brotherQuit = false;
 		
-		while(true) {
+		while(!brotherQuit) {
 			String userInput = menu_options(ap);
+			if (brotherQuit(userInput)) {
+				brotherQuit = true;
+			}
 			commandMaster(ap, userInput);
 		}
 	}
@@ -39,6 +39,13 @@ public class Menu {
 		displayEventsCommand(ap, userInput);
 		quitCommand(userInput);
 		execCommands(ap, userInput);
+	}
+	
+	private static boolean brotherQuit(String userInput) {
+		if (userInput.equals("Q")) {
+			return true;
+		}
+		return false;
 	}
 
 	private static void execCommands(ArgsProcessor ap, String userInput) {
@@ -137,6 +144,7 @@ public class Menu {
 			for(int i=0; i<len; i++) {
 				System.out.printf("%-20s %s\n", allEvents.get(i).getDate(), allEvents.get(i).getName());
 			}
+			System.out.println();
 		}
 	}
 
@@ -203,6 +211,7 @@ public class Menu {
 		System.out.println("Welcome to the DSP database. Here are some commands to use:");
 		System.out.println("Type DisplayInfo to show all information for student given full name");
 		System.out.println("Type Events to see a list of all DSP events");
+		System.out.println("Type Q to quit");
 		System.out.println("If you're on exec, you can also type your secret key");
 		System.out.println("----------------------\n\n");
 		String userInput = ap.nextString("Please type your command");
