@@ -40,8 +40,7 @@
         "company": {
           "name": "Apple",
           "industry": "Tech",
-          "description": "Steve Jobs",
-          "numStudents": 1
+          "description": "Steve Jobs"
         },
         "title": "CEO",
         "activeRole": false,
@@ -89,25 +88,6 @@
     "resume": []
   },
   {
-    "name": "will",
-    "gradYear": 2,
-    "initYear": 3,
-    "points": 0,
-    "isActive": true,
-    "isFall": true,
-    "voteElgible": true,
-    "school": "a",
-    "majors": [
-      "s",
-      "d"
-    ],
-    "minors": [
-      "f",
-      "d"
-    ],
-    "resume": []
-  },
-  {
     "name": "gavin",
     "gradYear": 2,
     "initYear": 3,
@@ -142,25 +122,6 @@
     "minors": [
       "f",
       "d"
-    ],
-    "resume": []
-  },
-  {
-    "name": "will",
-    "gradYear": 2,
-    "initYear": 3,
-    "points": 0,
-    "isActive": true,
-    "isFall": true,
-    "voteElgible": true,
-    "school": "a",
-    "majors": [
-      "s",
-      "d"
-    ],
-    "minors": [
-      "s",
-      "s"
     ],
     "resume": []
   },
@@ -176,25 +137,6 @@
     "majors": [
       "s",
       ""
-    ],
-    "minors": [
-      "f",
-      "d"
-    ],
-    "resume": []
-  },
-  {
-    "name": "will",
-    "gradYear": 2,
-    "initYear": 3,
-    "points": 0,
-    "isActive": true,
-    "isFall": true,
-    "voteElgible": true,
-    "school": "a",
-    "majors": [
-      "s",
-      "d"
     ],
     "minors": [
       "f",

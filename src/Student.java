@@ -227,14 +227,44 @@ public class Student {
 		return this.resume;
 	}
 	
+	public List<Role> removeRole(String companyName) {
+		for(int i=0; i<this.resume.size(); i++) {
+			if(this.resume.get(i).getCompany().getName().equals(companyName)) {
+				this.resume.remove(i);
+			}
+		}
+		return this.resume;
+	}
+	
+	
 	public List<Role> endResumeRoll(int roleIndex, int endDate) {
 		this.resume.get(roleIndex).endRoll(endDate);
 		return this.resume;
 	}
 	
+	public List<Role> endResumeRoll(String companyName, int endDate) {
+		for(int i=0; i<this.resume.size(); i++) {
+			if(this.resume.get(i).getCompany().getName().equals(companyName)) {				
+				this.resume.get(i).endRoll(endDate);
+				return this.resume;
+			}
+		}
+		return null;
+	}
+	
 	public List<Role> updateResumeRollTitle(int roleIndex, String newTitle) {
 		this.resume.get(roleIndex).updateTitle(newTitle);
 		return this.resume;
+	}
+	
+	public List<Role> updateResumeRollTitle(String companyName, String newTitle) {
+		for(int i=0; i<this.resume.size(); i++) {
+			if(this.resume.get(i).getCompany().getName().equals(companyName)) {				
+				this.resume.get(i).updateTitle(newTitle);
+				return this.resume;
+			}
+		}
+		return null;
 	}
 	
 }

@@ -41,6 +41,7 @@ public class Menu {
 		displayCompaniesCommand(ap, userInput);
 		createCompanyCommand(ap, userInput);
 		addResumeCommand(ap, userInput);
+		removeResumeCommand(ap, userInput);
 		quitCommand(userInput);
 		execCommands(ap, userInput);
 	}
@@ -214,6 +215,23 @@ public class Menu {
 		return createCompanyHelper(ap, companySearch);
 	}
 	
+	private static void removeResumeCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("RemoveResume")) {
+			String nameSearch = ap.nextString("What is the name of the member you want to add a resume item for?");
+			
+			for(int i=0; i<allStudents.size(); i++) {
+				if (allStudents.get(i).getName().equals(nameSearch)) {
+					String companyName = ap.nextString("What is the name of the company you want to remove?");
+					allStudents.get(i).removeRole(companyName);
+
+					updateStudentJSON();
+					updateCompanyJSON();
+					break;
+				}
+			}
+		}
+	}
+	
 	private static boolean searchBrotherName(String nameSearch, boolean showPoints) {
 		boolean brotherFound = false;
 		int len=allStudents.size();
@@ -280,6 +298,7 @@ public class Menu {
 		System.out.println("Type Companies to see a list of all DSP companies");
 		System.out.println("Type CreateCompany to create a company");
 		System.out.println("Type AddResume to add a resume item to a brother");
+		System.out.println("Type RemoveResume to remove a resume item to a brother");
 		System.out.println("Type Q to quit");
 		System.out.println("If you're on exec, you can also type your secret key");
 		System.out.println("----------------------\n\n");
