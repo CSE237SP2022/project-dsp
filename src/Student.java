@@ -172,13 +172,14 @@ public class Student {
 		System.out.println("Brother is active: " + this.getIsActive());
 		System.out.println("Brother joined in the fall: " + this.getIsFall());
 		System.out.println("Brother is eligible for bid vote: " + this.getIsEligible());
+		System.out.println("Resume: \n" + this.printResume());
 	}
 	
 	@Override
 	public String toString() {
 		String finalString = "Name: " + this.getName() + "\nSchool: " + this.getSchool() + "\nMajors: " + this.majors.toString() + "\nMinors: " + this.minors.toString();
 		finalString = finalString + "\nGraduation Year: " + this.getGradYear() + "\nInitiation Year: " + this.getInitYear() + "\nBrother is active: " + this.getIsActive();
-		finalString = finalString + "\nBrother joined in the fall: " + this.getIsFall() + "\nBrother is eligible for bid vote: " + this.getIsEligible();
+		finalString = finalString + "\nBrother joined in the fall: " + this.getIsFall() + "\nBrother is eligible for bid vote: " + this.getIsEligible() + "\nResume: " + this.printResume() + "\n";
 		return finalString;
 	}
 	
