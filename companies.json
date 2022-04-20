@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Apple",
+    "industry": "Tech",
+    "description": "Steve Jobs",
+    "numStudents": 0
+  },
+  {
+    "name": "Microsoft",
+    "industry": "Tech",
+    "description": "word",
+    "numStudents": 0
+  }
+]

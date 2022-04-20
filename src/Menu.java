@@ -16,6 +16,7 @@ public class Menu {
 
 	public static List<Student> allStudents = new ArrayList<Student>();
 	public static List<Event> allEvents = new ArrayList<Event>();
+	public static List<Company> allCompanies = new ArrayList<Company>();
 	public static String studentName;
 	public static String eventName;
 	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -37,6 +38,8 @@ public class Menu {
 	private static void commandMaster(ArgsProcessor ap, String userInput) {
 		displayInfoCommand(ap, userInput);
 		displayEventsCommand(ap, userInput);
+		displayCompaniesCommand(ap, userInput);
+		createCompanyCommand(ap, userInput);
 		quitCommand(userInput);
 		execCommands(ap, userInput);
 	}
@@ -53,7 +56,6 @@ public class Menu {
 			System.out.println("S: create a brother; R: remove a brother");
 			System.out.println("C: change someone's points");
 			System.out.println("AllPoints: view all brothers and their points");
-			System.out.println("Cr: create a company");
 			System.out.println("E: create an event");
 			System.out.println("Q: to quit");
 			System.out.println("----------------------\n\n");
@@ -142,9 +144,29 @@ public class Menu {
 		if (userInput.equals("Events")) {
 			int len=allEvents.size();
 			for(int i=0; i<len; i++) {
-				System.out.printf("%-20s %s\n", allEvents.get(i).getDate(), allEvents.get(i).getName());
+				System.out.println(allEvents.get(i) + "\n");
 			}
 			System.out.println();
+		}
+	}
+	
+	private static void displayCompaniesCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("Companies")) {
+			int len=allCompanies.size();
+			for(int i=0; i<len; i++) {
+				System.out.println(allCompanies.get(i) + "\n");
+			}
+		}
+	}
+	
+	private static void createCompanyCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("CreateCompany")) {
+			String nameOfCompany = ap.nextString("What is the name of the company?");
+			String industry = ap.nextString("What is the industry of the company?");
+			String description = ap.nextString("What is the company description?");
+			Company createCompany = new Company(nameOfCompany, industry, description);
+			allCompanies.add(createCompany);
+			updateCompanyJSON();
 		}
 	}
 
@@ -211,6 +233,8 @@ public class Menu {
 		System.out.println("Welcome to the DSP database. Here are some commands to use:");
 		System.out.println("Type DisplayInfo to show all information for student given full name");
 		System.out.println("Type Events to see a list of all DSP events");
+		System.out.println("Type Companies to see a list of all DSP companies");
+		System.out.println("Type CreateCompany to create a company");
 		System.out.println("Type Q to quit");
 		System.out.println("If you're on exec, you can also type your secret key");
 		System.out.println("----------------------\n\n");
@@ -235,6 +259,15 @@ public class Menu {
 			e.printStackTrace();
 		}
 	}
+	
+	private static void updateCompanyJSON() {
+		try (Writer writer = new FileWriter("companies.json")) {
+			gson.toJson(allCompanies, writer);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private static void readJSONs() {
 		try {
@@ -247,6 +280,11 @@ public class Menu {
 			List<Event> importEventsList = Arrays.asList(gson.fromJson(readerEvents, Event[].class));
 			importEventsList.forEach((event) -> allEvents.add(event));
 			readerEvents.close();
+			
+			Reader readerCompany = Files.newBufferedReader(Paths.get("companies.json"));
+			List<Company> importCompaniesList = Arrays.asList(gson.fromJson(readerCompany, Company[].class));
+			importCompaniesList.forEach((insertCompany) -> allCompanies.add(insertCompany));
+			readerCompany.close();
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
