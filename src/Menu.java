@@ -186,6 +186,12 @@ public class Menu {
 
 	private static String createStudent(ArgsProcessor ap, String input) {
 		String name = ap.nextString("Please input your name");
+		int len=allStudents.size();
+		for(int i=0; i<len; i++) {
+			if (allStudents.get(i).getName().equals(name)) {
+				name = ap.nextString("This student name already exists. Please input a new name");
+			}
+		} 
 		int gradYear = ap.nextInt("Input your grad year");
 		int initYear = ap.nextInt("Input your current year");
 
@@ -217,7 +223,7 @@ public class Menu {
 		String userInput = ap.nextString("Please type your command");
 		return userInput;
 	}
-
+	
 	private static void updateStudentJSON() {
 		try (Writer writer = new FileWriter("students.json")) {
 			gson.toJson(allStudents, writer);
