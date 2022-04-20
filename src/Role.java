@@ -87,6 +87,6 @@ public class Role {
 		 if(this.activeRole) {
 			 return "Company: " + this.getCompany().getName() + "\nTitle: " + this.getTitle() + "\nStarted: " + this.getStartDate();
 		 }
-		return "Company: " + this.getCompany().getName() + "\nTitle: " + this.getTitle() + "\nStarted: " + this.getStartDate() + "\nEnded: " + this.getEndDate() + "\nTime Spent: " + this.getTimeSpent();
+		return "Company: " + this.getCompany().getName() + "\nTitle: " + this.getTitle() + "\nStarted: " + this.getStartDate() + "\nEnded: " + this.getEndDate() + "\nYears Spent: " + this.getTimeSpent();
 	 }
 }

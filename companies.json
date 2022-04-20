@@ -2,13 +2,26 @@
   {
     "name": "Apple",
     "industry": "Tech",
-    "description": "Steve Jobs",
-    "numStudents": 0
+    "description": "Steve Jobs"
   },
   {
     "name": "Microsoft",
     "industry": "Tech",
-    "description": "word",
-    "numStudents": 0
+    "description": "word"
+  },
+  {
+    "name": "Salesforce",
+    "industry": "Tech",
+    "description": "I hate it here"
+  },
+  {
+    "name": "Goldman Sachs",
+    "industry": "IB",
+    "description": "steal money"
+  },
+  {
+    "name": "Monster",
+    "industry": "energy drinks",
+    "description": "zoom"
   }
 ]

@@ -4,27 +4,6 @@ public class Company {
 	private String name;
 	private String industry;
 	private String description;
-	private int numStudents;
-	
-	public Company(String setName, String setIndustry, String setDescription, int setNumStudents) {
-		if (setName == null)
-            throw new IllegalArgumentException("Company title can't be null");
-		
-		this.name = setName;
-		this.industry = setIndustry;
-		this.description = setDescription;
-		this.numStudents = setNumStudents;	
-	}
-	
-	public Company(String setName, String setIndustry, int setNumStudents) {
-		if (setName == null)
-            throw new IllegalArgumentException("Company title can't be null");
-		
-		this.name = setName;
-		this.industry = setIndustry;
-		this.description = "This is a very impressive company!";
-		this.numStudents = setNumStudents;	
-	}
 	
 	public Company(String setName, String setIndustry, String setDescription) {
 		if (setName == null)
@@ -32,8 +11,7 @@ public class Company {
 		
 		this.name = setName;
 		this.industry = setIndustry;
-		this.description = setDescription;
-		this.numStudents = 0;	
+		this.description = setDescription;	
 	}
 	
 	public Company(String setName, String setIndustry) {
@@ -43,8 +21,8 @@ public class Company {
 		this.name = setName;
 		this.industry = setIndustry;
 		this.description = "This is a very impressive company!";
-		this.numStudents = 0;	
 	}
+	
 	
 	public Company(String setName) {
 		if (setName == null)
@@ -52,8 +30,7 @@ public class Company {
 		
 		this.name = setName;
 		this.industry = "N/A";
-		this.description = "This is a very impressive company!";
-		this.numStudents = 0;	
+		this.description = "This is a very impressive company!";	
 	}
 	
 //	Get Name
@@ -69,11 +46,6 @@ public class Company {
 //	Get Description
 	public String getDescription() {
 		return this.description;
-	}
-	
-//	Get Student Number
-	public int getNumStudents() {
-		return this.numStudents;
 	}
 	
 //	Update company name
@@ -96,22 +68,10 @@ public class Company {
 		this.description = newDescription;
 		return this.description;
 	}
-	
-//	Add 1 to student count
-	public int joinCompany() {
-		this.numStudents++;
-		return this.numStudents;
-	}
-	
-//	Remove 1 from the student count
-	public int leaveCompany() {
-		this.numStudents--;
-		return this.numStudents;
-	}
 
 	@Override
 	public String toString() {
-		return "Company Name: " + this.getName() + "\nIndustry: " + this.getIndustry() + "\nDescription: " + this.getDescription() + "\nStudent Count: " + this.getNumStudents();
+		return "Company Name: " + this.getName() + "\nIndustry: " + this.getIndustry() + "\nDescription: " + this.getDescription();
 	}
 
 }

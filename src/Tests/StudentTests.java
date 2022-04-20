@@ -135,9 +135,9 @@ public class StudentTests {
 		+ "Initiation Year: 10"
 		+ "Brother is active: true"
 		+ "Brother joined in the fall: false"
-		+ "Brother is eligible for bid vote: false";
+		+ "Brother is eligible for bid vote: false"
+		+ "Resume: ";
 		assertEquals(studentInfo, finalString);
-		
 	}
 	
 	@Test
@@ -223,6 +223,25 @@ public class StudentTests {
 	}
 
 	@Test
+	public void testRemoveResumeItem3() {
+		s.addResumeItem(company, "CEO", 2020);
+		s.addResumeItem(company, "CEO", 2020, 2021);
+		List<Role> r = s.getResume();
+		
+		List<Role> testResume = new ArrayList<Role>();
+		testResume.add(currentRole);
+		testResume.add(previousRole);
+		
+		assertEquals(r.toString(), testResume.toString());
+		
+		s.removeRole(company.getName());
+		List<Role> r2 = s.getResume();
+		
+		testResume.remove(currentRole);
+		assertEquals(r2.toString(), testResume.toString());
+	}
+	
+	@Test
 	public void testGetResume() {
 		s.addResumeItem(company, "CEO", 2020);
 		List<Role> r = s.getResume();
@@ -251,12 +270,34 @@ public class StudentTests {
 		assertEquals(r.toString(), previousRole.toString());
 	}
 	
+	@Test
+	public void testEndResumeRoll2() {
+		s.addResumeItem(company, "CEO", 2020);
+		
+		s.endResumeRoll(company.getName(), 2021);
+		Role r = s.getResumeItem(0);		
+		
+		assertEquals(r.toString(), previousRole.toString());
+	}
+	
 	
 	@Test
 	public void testUpdateResumeRoll() {
 		s.addResumeItem(company, "CEO", 2020);
 		
 		s.updateResumeRollTitle(0, "CFO");
+		Role r = s.getResumeItem(0);		
+		
+		Role testRole = new Role(company, "CFO", 2020);
+		
+		assertEquals(r.toString(), testRole.toString());
+	}
+	
+	@Test
+	public void testUpdateResumeRoll2() {
+		s.addResumeItem(company, "CEO", 2020);
+		
+		s.updateResumeRollTitle(company.getName(), "CFO");
 		Role r = s.getResumeItem(0);		
 		
 		Role testRole = new Role(company, "CFO", 2020);
