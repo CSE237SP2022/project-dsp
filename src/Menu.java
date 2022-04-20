@@ -184,13 +184,11 @@ public class Menu {
 			for(int i=0; i<allStudents.size(); i++) {
 				if (allStudents.get(i).getName().equals(nameSearch)) {
 					Company companyInsert = resumeCompanyHelper(ap);
-					int companyInsertIndex = allCompanies.indexOf(companyInsert);
-
+					
 					String roleName = ap.nextString("What is the title of the role?");
 					boolean isActive = ap.nextBoolean("Is this an active role? true/false");
 					int yearStarted = ap.nextInt("What year did you start the positon?");
 					
-					Role newRole = null;
 					if(isActive) {
 						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted);
 					}
@@ -198,7 +196,6 @@ public class Menu {
 						int yearEnded = ap.nextInt("What year did you end the positon?");
 						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted, yearEnded);
 					}
-					allCompanies.get(companyInsertIndex).joinCompany();
 					updateStudentJSON();
 					updateCompanyJSON();
 					break;

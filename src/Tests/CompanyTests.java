@@ -13,7 +13,7 @@ private Company Apple;
 	
 	@Before
 	public void setup() {
-			Apple = new Company("Apple", "Tech", "Makes iPhones", 10);
+			Apple = new Company("Apple", "Tech", "Makes iPhones");
 		}
 	
 	@Test
@@ -32,12 +32,6 @@ private Company Apple;
 	public void testGetDescription() {
 		String checkName = Apple.getDescription();
 		assertEquals("Makes iPhones", checkName);
-	}
-	
-	@Test
-	public void testGetNumStudents() {
-		int checkName = Apple.getNumStudents();
-		assertEquals(10, checkName);
 	}
 	
 	@Test
@@ -71,31 +65,9 @@ private Company Apple;
 	}
 	
 	@Test
-	public void testJoinCompany() {
-		int checkName = Apple.getNumStudents();
-		assertEquals(10, checkName);
-		
-		int returnV = Apple.joinCompany();
-		checkName = Apple.getNumStudents();
-		
-		assertEquals(checkName, returnV, 11);
-	}
-	
-	@Test
-	public void testLeaveCompany() {
-		int checkName = Apple.getNumStudents();
-		assertEquals(checkName, 10);
-		
-		int returnV = Apple.leaveCompany();
-		checkName = Apple.getNumStudents();
-		
-		assertEquals(checkName, returnV, 9);
-	}
-	
-	@Test
 	public void testToString() {
 		String output = Apple.toString().replace("\n", "");
-		String result = "Company Name: Apple" + "Industry: Tech" +  "Description: Makes iPhones" + "Student Count: 10";
+		String result = "Company Name: Apple" + "Industry: Tech" +  "Description: Makes iPhones";
 		assertEquals(result, output);
 	}
 
