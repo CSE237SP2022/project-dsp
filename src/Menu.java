@@ -21,6 +21,8 @@ public class Menu {
 	public static String eventName;
 	public static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+	
+	//it's easy to get lost with all of these small methods, so they are categorized
 	public static void main(String args[]) {
 		ArgsProcessor ap = new ArgsProcessor(args);
 		readJSONs();
@@ -35,6 +37,23 @@ public class Menu {
 		}
 	}
 
+	//menu options and command methods are used below
+	private static String menu_options(ArgsProcessor ap) {
+		System.out.println("Welcome to the DSP database. Here are some commands to use:");
+		System.out.println("Type DisplayInfo to show all information for student given full name");
+		System.out.println("Type Events to see a list of all DSP events");
+		System.out.println("Type Companies to see a list of all DSP companies");
+		System.out.println("Type CreateCompany to create a company");
+		System.out.println("Type AddResume to add a resume item to a brother");
+		System.out.println("Type RemoveResume to remove a resume item of a brother");
+		System.out.println("Type EditResume to edit a resume item of a brother");
+		System.out.println("Type Q to quit");
+		System.out.println("If you're on exec, you can also type your secret key");
+		System.out.println("----------------------\n\n");
+		String userInput = ap.nextString("Please type your command");
+		return userInput;
+	}
+	
 	private static void commandMaster(ArgsProcessor ap, String userInput) {
 		displayInfoCommand(ap, userInput);
 		displayEventsCommand(ap, userInput);
@@ -47,13 +66,6 @@ public class Menu {
 		execCommands(ap, userInput);
 	}
 	
-	private static boolean brotherQuit(String userInput) {
-		if (userInput.equals("Q")) {
-			return true;
-		}
-		return false;
-	}
-
 	private static void execCommands(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("rose")) {
 			System.out.println("S: create a brother; R: remove a brother");
@@ -63,10 +75,9 @@ public class Menu {
 			System.out.println("Q: to quit");
 			System.out.println("----------------------\n\n");
 			allExecCommands(ap);
-			//TODO: add display events command
 		}
 	}
-
+	
 	private static void allExecCommands(ArgsProcessor ap) {
 		String execCommand = ap.nextString("Welcome exec member. Here are some commands");
 		execCreateStudentCommand(ap, execCommand);
@@ -76,7 +87,8 @@ public class Menu {
 		execCreateEventCommand(ap, execCommand);
 		quitCommand(execCommand);
 	}
-
+	
+	//execution of commands
 	private static void execChangeBrotherPoints(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("C")) {
 			String brotherName = ap.nextString("What is the name of the brother to change points");
@@ -93,23 +105,21 @@ public class Menu {
 		}
 	}
 	
-	private static void execCreateEventCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("E")) {
-			eventName = createEvent(ap, userInput);
+	//used to quit out of program altogether
+	private static boolean brotherQuit(String userInput) {
+		if (userInput.equals("Q")) {
+			return true;
+		}
+		return false;
+	}
+
+	//quits out of "exec mode" (after typing rose)
+	private static void quitCommand(String userInput) {
+		if (userInput.equals("Q")) {
+			return;
 		}
 	}
-
-	private static String createEvent(ArgsProcessor ap, String userInput) {
-		String dateOfEvent = ap.nextString("What is the date of the event");
-		String nameOfEvent = ap.nextString("What is the name of the event");
-		int pointsForEvent = ap.nextInt("How many points is this event worth");
-		boolean isRequired = ap.nextBoolean("Is the event required? true/false");
-		Event createEvent = new Event(dateOfEvent, nameOfEvent, pointsForEvent, isRequired);
-		allEvents.add(createEvent);
-		updateEventJSON();
-		return nameOfEvent;
-	}
-
+	
 	private static void execRemoveBrother(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("R")) {
 			String brotherName = ap.nextString("What is the name of the brother to be removed?");
@@ -120,114 +130,6 @@ public class Menu {
 					updateStudentJSON();
 					System.out.println(brotherName + " has been removed.");
 					System.out.println("----------------------\n\n");
-				}
-			}
-		}
-	}
-
-	private static void quitCommand(String userInput) {
-		if (userInput.equals("Q")) {
-			return;
-		}
-	}
-
-	private static void displayInfoCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("DisplayInfo")) {
-			String nameSearch = ap.nextString("What is the name of the member you want to display information for?");
-			boolean showPoints = ap.nextBoolean("Do you only want to see your points? true/false");
-			boolean brotherFound = searchBrotherName(nameSearch, showPoints);
-			if (!brotherFound) {
-				System.out.println("Brother not found. Please check the spelling");
-				System.out.println("----------------------\n\n");
-			}
-		}
-	}
-	
-	private static void displayEventsCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("Events")) {
-			int len=allEvents.size();
-			for(int i=0; i<len; i++) {
-				System.out.println(allEvents.get(i) + "\n");
-			}
-			System.out.println();
-		}
-	}
-	
-	private static void displayCompaniesCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("Companies")) {
-			int len=allCompanies.size();
-			for(int i=0; i<len; i++) {
-				System.out.println(allCompanies.get(i) + "\n");
-			}
-		}
-	}
-	
-	private static void createCompanyCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("CreateCompany")) {
-			String nameOfCompany = ap.nextString("What is the name of the company?");
-			createCompanyHelper(ap, nameOfCompany);
-		}
-	}
-	
-	private static Company createCompanyHelper(ArgsProcessor ap, String nameOfCompany) {
-		String industry = ap.nextString("What is the industry of the company?");
-		String description = ap.nextString("What is the company description?");
-		Company createCompany = new Company(nameOfCompany, industry, description);
-		allCompanies.add(createCompany);
-		updateCompanyJSON();
-		return createCompany;
-	}
-	 
-
-	private static void addResumeCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("AddResume")) {
-			String nameSearch = ap.nextString("What is the name of the member you want to add a resume item for?");
-			
-			for(int i=0; i<allStudents.size(); i++) {
-				if (allStudents.get(i).getName().equals(nameSearch)) {
-					Company companyInsert = resumeCompanyHelper(ap);
-					
-					String roleName = ap.nextString("What is the title of the role?");
-					boolean isActive = ap.nextBoolean("Is this an active role? true/false");
-					int yearStarted = ap.nextInt("What year did you start the positon?");
-					
-					if(isActive) {
-						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted);
-					}
-					else {
-						int yearEnded = ap.nextInt("What year did you end the positon?");
-						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted, yearEnded);
-					}
-					updateStudentJSON();
-					updateCompanyJSON();
-					break;
-				}
-			}
-		}
-	}
-	
-	private static Company resumeCompanyHelper(ArgsProcessor ap) {
-		String companySearch = ap.nextString("What is the name of the company?");
-		for(int j =0; j< allCompanies.size(); j++) {
-			if (allCompanies.get(j).getName().equals(companySearch)) {
-				return allCompanies.get(j);
-			}
-		}
-		return createCompanyHelper(ap, companySearch);
-	}
-	
-	private static void removeResumeCommand(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("RemoveResume")) {
-			String nameSearch = ap.nextString("What is the name of the member you want to add a resume item for?");
-			
-			for(int i=0; i<allStudents.size(); i++) {
-				if (allStudents.get(i).getName().equals(nameSearch)) {
-					String companyName = ap.nextString("What is the name of the company you want to remove?");
-					allStudents.get(i).removeRole(companyName);
-
-					updateStudentJSON();
-					updateCompanyJSON();
-					break;
 				}
 			}
 		}
@@ -257,36 +159,78 @@ public class Menu {
 		}
 	}
 	
-	private static boolean searchBrotherName(String nameSearch, boolean showPoints) {
-		boolean brotherFound = false;
-		int len=allStudents.size();
-		for(int i=0; i<len; i++) {
-			if (allStudents.get(i).getName().equals(nameSearch)) {
-				brotherFound = true;
-				if (!showPoints) {
-					allStudents.get(i).displayAllInfo();
-				}
-				else {
-					int numPoints = allStudents.get(i).getPoints();
-					System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
-					System.out.println("----------------------\n\n");
+	private static void removeResumeCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("RemoveResume")) {
+			String nameSearch = ap.nextString("What is the name of the member you want to add a resume item for?");
+			
+			for(int i=0; i<allStudents.size(); i++) {
+				if (allStudents.get(i).getName().equals(nameSearch)) {
+					String companyName = ap.nextString("What is the name of the company you want to remove?");
+					allStudents.get(i).removeRole(companyName);
+					
+					updateStudentJSON();
+					updateCompanyJSON();
+					break;
 				}
 			}
 		}
-		return brotherFound;
 	}
-
-	public static void execDisplayAllPoints(ArgsProcessor ap, String userInput) {
-		if (userInput.equals("AllPoints")) {
-			int len=allStudents.size();
-			for(int i=0; i<len; i++) {
-				System.out.printf("%-20s %s\n", allStudents.get(i).getName(), allStudents.get(i).getPoints());
+	
+	private static Company resumeCompanyHelper(ArgsProcessor ap) {
+		String companySearch = ap.nextString("What is the name of the company?");
+		for(int j =0; j< allCompanies.size(); j++) {
+			if (allCompanies.get(j).getName().equals(companySearch)) {
+				return allCompanies.get(j);
 			}
-			System.out.println("----------------------\n\n");
+		}
+		return createCompanyHelper(ap, companySearch);
+	}
+	
+	private static void addResumeCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("AddResume")) {
+			String nameSearch = ap.nextString("What is the name of the member you want to add a resume item for?");
+			
+			for(int i=0; i<allStudents.size(); i++) {
+				if (allStudents.get(i).getName().equals(nameSearch)) {
+					Company companyInsert = resumeCompanyHelper(ap);
+					
+					String roleName = ap.nextString("What is the title of the role?");
+					boolean isActive = ap.nextBoolean("Is this an active role? true/false");
+					int yearStarted = ap.nextInt("What year did you start the positon?");
+					
+					if(isActive) {
+						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted);
+					}
+					else {
+						int yearEnded = ap.nextInt("What year did you end the positon?");
+						allStudents.get(i).addResumeItem(companyInsert, roleName, yearStarted, yearEnded);
+					}
+					updateStudentJSON();
+					updateCompanyJSON();
+					break;
+				}
+			}
+		}
+	}
+	
+	//event, student, and company creation
+	private static void execCreateEventCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("E")) {
+			eventName = createEvent(ap, userInput);
 		}
 	}
 
-
+	private static String createEvent(ArgsProcessor ap, String userInput) {
+		String dateOfEvent = ap.nextString("What is the date of the event");
+		String nameOfEvent = ap.nextString("What is the name of the event");
+		int pointsForEvent = ap.nextInt("How many points is this event worth");
+		boolean isRequired = ap.nextBoolean("Is the event required? true/false");
+		Event createEvent = new Event(dateOfEvent, nameOfEvent, pointsForEvent, isRequired);
+		allEvents.add(createEvent);
+		updateEventJSON();
+		return nameOfEvent;
+	}
+	
 	private static void execCreateStudentCommand(ArgsProcessor ap, String userInput) {
 		if (userInput.equals("S")) {
 			studentName = createStudent(ap, userInput);
@@ -321,28 +265,88 @@ public class Menu {
 		return name;
 	}
 
-	private static String menu_options(ArgsProcessor ap) {
-		//for future iteration, you'll need to login
-		System.out.println("Welcome to the DSP database. Here are some commands to use:");
-		System.out.println("Type DisplayInfo to show all information for student given full name");
-		System.out.println("Type Events to see a list of all DSP events");
-		System.out.println("Type Companies to see a list of all DSP companies");
-		System.out.println("Type CreateCompany to create a company");
-		System.out.println("Type AddResume to add a resume item to a brother");
-		System.out.println("Type RemoveResume to remove a resume item of a brother");
-		System.out.println("Type EditResume to edit a resume item of a brother");
-		System.out.println("Type Q to quit");
-		System.out.println("If you're on exec, you can also type your secret key");
-		System.out.println("----------------------\n\n");
-		String userInput = ap.nextString("Please type your command");
-		return userInput;
+	private static void createCompanyCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("CreateCompany")) {
+			String nameOfCompany = ap.nextString("What is the name of the company?");
+			createCompanyHelper(ap, nameOfCompany);
+		}
 	}
 	
+	private static Company createCompanyHelper(ArgsProcessor ap, String nameOfCompany) {
+		String industry = ap.nextString("What is the industry of the company?");
+		String description = ap.nextString("What is the company description?");
+		Company createCompany = new Company(nameOfCompany, industry, description);
+		allCompanies.add(createCompany);
+		updateCompanyJSON();
+		return createCompany;
+	}
+	
+	//displaying information 
+	private static void displayInfoCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("DisplayInfo")) {
+			String nameSearch = ap.nextString("What is the name of the member you want to display information for?");
+			boolean showPoints = ap.nextBoolean("Do you only want to see your points? true/false");
+			boolean brotherFound = searchBrotherName(nameSearch, showPoints);
+			if (!brotherFound) {
+				System.out.println("Brother not found. Please check the spelling");
+				System.out.println("----------------------\n\n");
+			}
+		}
+	}
+	
+	private static void displayEventsCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("Events")) {
+			int len=allEvents.size();
+			for(int i=0; i<len; i++) {
+				System.out.println(allEvents.get(i) + "\n");
+			}
+			System.out.println();
+		}
+	}
+	
+	private static void displayCompaniesCommand(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("Companies")) {
+			int len=allCompanies.size();
+			for(int i=0; i<len; i++) {
+				System.out.println(allCompanies.get(i) + "\n");
+			}
+		}
+	}
+	
+	public static void execDisplayAllPoints(ArgsProcessor ap, String userInput) {
+		if (userInput.equals("AllPoints")) {
+			int len=allStudents.size();
+			for(int i=0; i<len; i++) {
+				System.out.printf("%-20s %s\n", allStudents.get(i).getName(), allStudents.get(i).getPoints());
+			}
+			System.out.println("----------------------\n\n");
+		}
+	}
+	
+	private static boolean searchBrotherName(String nameSearch, boolean showPoints) {
+		boolean brotherFound = false;
+		int len=allStudents.size();
+		for(int i=0; i<len; i++) {
+			if (allStudents.get(i).getName().equals(nameSearch)) {
+				brotherFound = true;
+				if (!showPoints) {
+					allStudents.get(i).displayAllInfo();
+				}
+				else {
+					int numPoints = allStudents.get(i).getPoints();
+					System.out.println(allStudents.get(i).getName() + " has " + numPoints + " points!");
+					System.out.println("----------------------\n\n");
+				}
+			}
+		}
+		return brotherFound;
+	}
+
+	//all JSON file material
 	private static void updateStudentJSON() {
 		try (Writer writer = new FileWriter("students.json")) {
 			gson.toJson(allStudents, writer);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -351,7 +355,6 @@ public class Menu {
 		try (Writer writer = new FileWriter("events.json")) {
 			gson.toJson(allEvents, writer);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -360,7 +363,6 @@ public class Menu {
 		try (Writer writer = new FileWriter("companies.json")) {
 			gson.toJson(allCompanies, writer);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -383,7 +385,6 @@ public class Menu {
 			readerCompany.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
