@@ -13,6 +13,7 @@ This third iteration was spent finishing up the final pieces of our DSP tracker.
 We also finished up the Resume class which includes information on companies and work experiences for each brother, also using JSON. Lastly, we implemented commands in the main method for all these new additions. Previous peer feedback had mentioned glitchy main menu print statements, so we made sure to also clean up bugs within our Menu (previously Run) class, including duplicate print statements and redundant code.  
 
 – – – – –
+
 PLEASE READ!!!! An important part of our project is incorporating JSON to store our information. We did this to make the project useful. Before the JSON file, all information was lost after quitting out of the program. Now, it is stored in a file that can be saved and exported. In order to run our code, the user MUST have gson set up. Below we have added some basic instructions for how to set this up:
 
     –download this JSON jar file: https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar
