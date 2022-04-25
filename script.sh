@@ -1,2 +1,2 @@
 javac -d bin src/*.java argsProcessor/*.java
-java -cp bin src.Run
+java -cp bin src.Menu
