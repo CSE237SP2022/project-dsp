@@ -16,11 +16,11 @@ We also finished up the Resume class which includes information on companies and
 
 PLEASE READ!!!! An important part of our project is incorporating JSON to store our information. We did this to make the project useful. Before the JSON file, all information was lost after quitting out of the program. Now, it is stored in a file that can be saved and exported. In order to run our code, the user MUST have gson set up. Below we have added some basic instructions for how to set this up:
 
-    –download this JSON jar file: https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar
+    – download this JSON jar file: https://repo1.maven.org/maven2/com/google/code/gson/gson/2.6.2/gson-2.6.2.jar
 
-    –follow instructions on this easy-to-follow website to incorporate the newly downloaded file in java user libraries https://medium.com/programmers-blockchain/importing-gson-into-eclipse-ec8cf678ad52
+    – follow instructions on this easy-to-follow website to incorporate the newly downloaded file in java user libraries https://medium.com/programmers-blockchain/importing-gson-into-eclipse-ec8cf678ad52
 
-    –Once downloaded, navigate to eclipse. Right click the project folder → build path → configure build path → libraries (top tab bar) → click on the gson file you just downloaded → click the edit button → edit the path to be where the file is on your device
+    – Once downloaded, navigate to eclipse. Right click the project folder → build path → configure build path → libraries (top tab bar) → click on the gson file you just downloaded → click the edit button → edit the path to be where the file is on your device
 
 **Gson is now ready to be used, and our main method is able to be run. View the script file to find the commands to insert into the terminal.** We incorporated JSON with two methods, a read JSON method and a right to JSON method.The read JSON method calls the method in main, and the righttoJSON method is called anytime you update all students, and rewrites over the old file each time.
 
