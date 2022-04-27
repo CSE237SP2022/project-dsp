@@ -6,7 +6,7 @@ This will be a "points" tracker for the active DSP brothers — Alpha Chi chapte
     -*admin can add and remove brothers, change points, view a list of all brothers + points*
     -*brother information is stored in a gson file*
     
- All of these user features can get bogged down in the code, so look for comments in the Menu (previously named Run) file that break up methods into categories. 
+ All of these user features can get bogged down in the code, so look for comments in the Menu (previously named Run) file that break up methods into categories. We really wanted to focus on code quality and organization for this last iteration.
  
 This third iteration was spent finishing up the final pieces of our DSP tracker. We added the event, company and resume components to the tracker. For events, we had characteristics such as name, points, date, and required event boolean which would contribute to each brothers points depending on attendance. In order to store this data, we implemented JSON once again as we did previously for Student. 
 
@@ -21,6 +21,8 @@ PLEASE READ!!!! An important part of our project is incorporating JSON to store 
 - Once downloaded, navigate to eclipse. Right click the project folder → build path → configure build path → libraries (top tab bar) → click on the gson file you just downloaded → click the edit button → edit the path to be where the file is on your device
 
 **Gson is now ready to be used, and our main method is able to be run. View the script file to find the commands to insert into the terminal.** We incorporated JSON with two methods, a read JSON method and a right to JSON method.The read JSON method calls the method in main, and the righttoJSON method is called anytime you update all students, and rewrites over the old file each time.
+
+For those that had trouble with our script, there is likely an issue with the GSON data storage. If the script gives an error, your best bet may be to import the repo into eclipse. We know this isn't ideal, but the script worked for us in our last iteration and hasn't changed (except changing the name from Run to Menu).
 
 Our code is functional for all commands. The command execution is explained in the user output. **Remember, to gain access to exec commands, type “rose.”**
 
